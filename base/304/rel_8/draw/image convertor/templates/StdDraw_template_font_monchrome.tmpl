@@ -1,0 +1,69 @@
+$(start_block_header)
+//================================================================================================//
+// M O D U L E   H E A D E R
+//------------------------------------------------------------------------------------------------//
+// generated with LCD Image Converter (http://code.google.com/p/lcd-image-converter)
+// filename: 				$(fileName)
+// name: 					$(documentName)
+// family: 					$(fontFamily)
+// size: 					$(fontSize)
+// style: 					$(fontStyle)
+// included characters: 	$(string)
+// antialiasing: 			$(fontAntialiasing)
+// type: 					$(fontWidthType)
+// encoding: 				$(encoding)
+// unicode bom: 			$(bom)
+// preset name: 			$(preset)
+// data block size: 		$(dataBlockSize) bit(s), U$(dataBlockSize)_t
+// RLE compression enabled: $(rle)
+// conversion type: 		$(convType), $(monoType) $(edge)
+// bits per pixel: 			$(bpp)
+//
+// preprocess:
+//  main scan direction: 	$(scanMain)
+//  line scan direction: 	$(scanSub)
+//  inverse: 				$(inverse)
+//================================================================================================//
+
+
+
+//================================================================================================//
+// I N C L U D E S
+//------------------------------------------------------------------------------------------------//
+#include "Core.h"
+#include "draw/StdDraw.h"
+//================================================================================================//
+$(end_block_header)
+
+
+//================================================================================================//
+// E X P O R T E D   V A R I A B L E S
+//------------------------------------------------------------------------------------------------//
+//character images
+$(start_block_images_table)
+static const U$(dataBlockSize) imagedata_font_$(documentName_ws)_char_0x$(charCode)[$(blocksCount)] = 
+{
+    $(imageData)
+};
+static const IMAGE image_font_$(documentName_ws)_char_0x$(charCode) = {IMAGE_FORMAT_MONOCHROME_1BPP, $(width), $(height), imagedata_font_$(documentName_ws)_char_0x$(charCode)};
+$(end_block_images_table)
+//------------------------------------------------------------------------------------------------//
+//reference stream
+static const U8 reference_stream_font_$(documentName_ws)[] = 
+{$(start_block_images_table)
+    0x$(charCode)$(comma)	// character: '@charText@'
+$(end_block_images_table)
+};
+//------------------------------------------------------------------------------------------------//
+//image stream
+static const IMAGE* image_stream_font_$(documentName_ws)[] = 
+{$(start_block_images_table)
+    &image_font_$(documentName_ws)_char_0x$(charCode)$(comma)	// character: '@charText@'
+$(end_block_images_table)
+};
+//------------------------------------------------------------------------------------------------//
+//font declariation
+$(start_block_font_def)
+static const FONT font_$(documentName_ws) = {FONT_FORMAT_MONOCHROME, $(imagesCount), reference_stream_font_$(documentName_ws), (IMAGE**)image_stream_font_$(documentName_ws)};
+$(end_block_font_def)
+//================================================================================================//

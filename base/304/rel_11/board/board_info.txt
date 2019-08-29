@@ -1,0 +1,10 @@
+address=0001C7CC
+hardware_number=ASFC000300
+serial_number=PS1643000638
+hardware_name=FLAMCO_FLEXCON
+hardware_version=2
+hardware_revision=0
+hardware_function=1
+board_family_number=54
+compatibility_number=0
+reserved=0

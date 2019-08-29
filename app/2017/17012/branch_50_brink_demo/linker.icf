@@ -1,0 +1,97 @@
+/*###ICF### Section handled by ICF editor, don't touch! ****/
+/*-Editor annotation file-*/
+/* IcfEditorFile="$TOOLKIT_DIR$\config\ide\IcfEditor\cortex_v1_0.xml" */
+//================================================================================================//
+// Specials
+//------------------------------------------------------------------------------------------------//
+define symbol __ICFEDIT_intvec_start__ = 0x08000000;
+//================================================================================================//
+
+
+//================================================================================================//
+// Memory Addresses
+//------------------------------------------------------------------------------------------------//
+//RAM
+define symbol __region_RAM_ISR_TABLE_start__    = 0x20000000;
+define symbol __region_RAM_ISR_TABLE_end__      = 0x200000BF;
+define symbol __region_RAM_SIGNATURE_start__    = 0x200000C0;
+define symbol __region_RAM_SIGNATURE_end__      = 0x200000DF;
+define symbol __ICFEDIT_region_RAM_start__      = 0x200000E0;
+define symbol __ICFEDIT_region_RAM_end__        = 0x20000FFF;
+//FLASH
+define symbol __region_ROM_ISR_TABLE_start__    = 0x08000000;
+define symbol __region_ROM_ISR_TABLE_end__      = 0x0800003F;
+define symbol __ICFEDIT_region_ROM_start__      = 0x08000040;
+define symbol __ICFEDIT_region_ROM_end__        = 0x08007FFF;
+//================================================================================================//
+
+
+//================================================================================================//
+// Sizes
+//------------------------------------------------------------------------------------------------//
+define symbol __ICFEDIT_size_cstack__           = 0x400;
+define symbol __ICFEDIT_size_heap__             = 0x000;
+//================================================================================================//
+/**** End of ICF editor section. ###ICF###*/
+
+
+//================================================================================================//
+// Symbols
+//------------------------------------------------------------------------------------------------//
+define block CSTACK    with alignment = 8, size = __ICFEDIT_size_cstack__   { };
+define block HEAP      with alignment = 8, size = __ICFEDIT_size_heap__     { };
+
+//define the stack at the end of the RAM region because at link time the IAR linker doesn't seem to have the option
+//that you can get the stack address. If we make the start of the stack fixed, we can use it in the system library
+//for the STM32 to define in the
+define symbol __stack_start_address__ = __ICFEDIT_region_RAM_end__ - __ICFEDIT_size_cstack__;
+//================================================================================================//
+
+
+//================================================================================================//
+// Regions
+//------------------------------------------------------------------------------------------------//
+define memory mem with size         = 4G;
+define region region_RAM_ISR_TABLE  = mem:[from __region_RAM_ISR_TABLE_start__  to __region_RAM_ISR_TABLE_end__];
+define region region_RAM_SIGNATURE  = mem:[from __region_RAM_SIGNATURE_start__  to __region_RAM_SIGNATURE_end__];
+define region region_RAM            = mem:[from __ICFEDIT_region_RAM_start__    to __stack_start_address__];
+define region region_STACK          = mem:[from __stack_start_address__         to __ICFEDIT_region_RAM_end__];
+define region region_ROM_ISR_TABLE  = mem:[from __region_ROM_ISR_TABLE_start__  to __region_ROM_ISR_TABLE_end__];
+define region region_ROM            = mem:[from __ICFEDIT_region_ROM_start__    to __ICFEDIT_region_ROM_end__];
+//================================================================================================//
+
+
+//================================================================================================//
+// Initialize
+//------------------------------------------------------------------------------------------------//
+initialize manually { readwrite };
+do not initialize   { section .noinit };
+//================================================================================================//
+
+
+//================================================================================================//
+// Keep sections
+//------------------------------------------------------------------------------------------------//
+keep{section vector};
+//================================================================================================//
+
+
+//================================================================================================//
+// Place in
+//------------------------------------------------------------------------------------------------//
+place in region_RAM_ISR_TABLE                       {section ram_isr_table};
+place in region_RAM_SIGNATURE                       {section ram_signature};
+place in region_RAM                                 {readwrite, block HEAP};
+place in region_STACK                               {block CSTACK};
+place in region_ROM_ISR_TABLE                       {section vector};
+place in region_ROM                                 {readonly};
+//================================================================================================//
+
+
+//================================================================================================//
+// Export
+//------------------------------------------------------------------------------------------------//
+export symbol __ICFEDIT_region_RAM_start__;
+export symbol __ICFEDIT_region_RAM_end__;
+//================================================================================================//
+

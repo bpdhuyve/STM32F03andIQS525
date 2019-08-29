@@ -1,0 +1,13 @@
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.60.2\arm\bin\armproc.dll" 
+
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.60.2\arm\bin\armjlink2.dll" 
+
+"C:\depot\Software\uc_dsp_platform_2\app\2017\17012\branch_50_brink_demo\Debug\Exe\link.out" 
+
+--plugin "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.60.2\arm\bin\armbat.dll" 
+
+--device_macro "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.60.2\arm\config\debugger\ST\STM32F0xx.dmac" 
+
+
+
+

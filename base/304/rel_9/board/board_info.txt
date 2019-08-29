@@ -1,0 +1,10 @@
+address=0001DFCC
+hardware_number=ASFC007800
+serial_number=PS1602000410
+hardware_name=FLAMCO_FLEXCON
+hardware_version=20
+hardware_revision=2
+hardware_function=1
+board_family_number=54
+compatibility_number=123
+reserved=2

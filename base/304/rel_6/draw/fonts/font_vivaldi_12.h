@@ -1,0 +1,1954 @@
+//================================================================================================//
+// M O D U L E   H E A D E R
+//------------------------------------------------------------------------------------------------//
+// generated with LCD Image Converter (http://code.google.com/p/lcd-image-converter)
+// filename: 				C:/depot/uc_dsp_platform_2/base/304/main/draw/font setup example.xml
+// name: 					Vivaldi_12
+// family: 					Vivaldi
+// size: 					12
+// style: 					Italic
+// included characters: 	 !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
+// antialiasing: 			no
+// type: 					proportional
+// encoding: 				UTF-8
+// unicode bom: 			no
+// preset name: 			Monochrome
+// data block size: 		8 bit(s), U8_t
+// RLE compression enabled: no
+// conversion type: 		Monochrome, Diffuse Dither 128
+// bits per pixel: 			1
+//
+// preprocess:
+//  main scan direction: 	top to bottom
+//  line scan direction: 	backward
+//  inverse: 				no
+//================================================================================================//
+
+
+
+//================================================================================================//
+// I N C L U D E S
+//------------------------------------------------------------------------------------------------//
+#include "Core.h"
+#include "draw/StdDraw.h"
+//================================================================================================//
+
+
+//================================================================================================//
+// E X P O R T E D   V A R I A B L E S
+//------------------------------------------------------------------------------------------------//
+//character images
+
+static const U8 imagedata_font_Vivaldi_12_char_0x20[14] =
+{
+    0xe0,
+    0xe0,
+    0xe0,
+    0xe0,
+    0xe0,
+    0xe0,
+    0xe0,
+    0xe0,
+    0xe0,
+    0xe0,
+    0xe0,
+    0xe0,
+    0xe0,
+    0xe0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x20 = { IMAGE_FORMAT_MONOCHROME, 3, 14, imagedata_font_Vivaldi_12_char_0x20};
+static const U8 imagedata_font_Vivaldi_12_char_0x21[14] =
+{
+    0xf0,
+    0xf0,
+    0xf0,
+    0xc0,
+    0xd0,
+    0xd0,
+    0xd0,
+    0xb0,
+    0xb0,
+    0xb0,
+    0xb0,
+    0xf0,
+    0xf0,
+    0xf0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x21 = { IMAGE_FORMAT_MONOCHROME, 4, 14, imagedata_font_Vivaldi_12_char_0x21};
+static const U8 imagedata_font_Vivaldi_12_char_0x22[14] =
+{
+    0xf8,
+    0xf8,
+    0xf8,
+    0xe0,
+    0xc8,
+    0xf8,
+    0xf8,
+    0xf8,
+    0xf8,
+    0xf8,
+    0xf8,
+    0xf8,
+    0xf8,
+    0xf8
+};
+static const IMAGE image_font_Vivaldi_12_char_0x22 = { IMAGE_FORMAT_MONOCHROME, 5, 14, imagedata_font_Vivaldi_12_char_0x22};
+static const U8 imagedata_font_Vivaldi_12_char_0x23[14] =
+{
+    0xfc,
+    0xfc,
+    0xfc,
+    0xe0,
+    0xe8,
+    0xd4,
+    0x80,
+    0xcc,
+    0x84,
+    0x9c,
+    0x3c,
+    0xfc,
+    0xfc,
+    0xfc
+};
+static const IMAGE image_font_Vivaldi_12_char_0x23 = { IMAGE_FORMAT_MONOCHROME, 6, 14, imagedata_font_Vivaldi_12_char_0x23};
+static const U8 imagedata_font_Vivaldi_12_char_0x24[14] =
+{
+    0xfe,
+    0xfe,
+    0xfe,
+    0xf8,
+    0xf4,
+    0xe6,
+    0xe6,
+    0xae,
+    0xb6,
+    0x86,
+    0x8e,
+    0xbe,
+    0xfe,
+    0xfe
+};
+static const IMAGE image_font_Vivaldi_12_char_0x24 = { IMAGE_FORMAT_MONOCHROME, 7, 14, imagedata_font_Vivaldi_12_char_0x24};
+static const U8 imagedata_font_Vivaldi_12_char_0x25[14] =
+{
+    0xff,
+    0xff,
+    0xff,
+    0xe4,
+    0xd5,
+    0xcb,
+    0xfb,
+    0xf7,
+    0xec,
+    0xea,
+    0xd9,
+    0xff,
+    0xff,
+    0xff
+};
+static const IMAGE image_font_Vivaldi_12_char_0x25 = { IMAGE_FORMAT_MONOCHROME, 8, 14, imagedata_font_Vivaldi_12_char_0x25};
+static const U8 imagedata_font_Vivaldi_12_char_0x26[28] =
+{
+    0xff, 0xf0,
+    0xff, 0xf0,
+    0xff, 0xf0,
+    0xf1, 0xf0,
+    0xeb, 0xe0,
+    0xef, 0xe0,
+    0xf0, 0x10,
+    0x80, 0xf0,
+    0x6e, 0xf0,
+    0x3d, 0x70,
+    0x83, 0x90,
+    0xff, 0xf0,
+    0xff, 0xf0,
+    0xff, 0xf0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x26 = { IMAGE_FORMAT_MONOCHROME, 12, 14, imagedata_font_Vivaldi_12_char_0x26};
+static const U8 imagedata_font_Vivaldi_12_char_0x27[14] =
+{
+    0xe0,
+    0xe0,
+    0xe0,
+    0xc0,
+    0xc0,
+    0xe0,
+    0xe0,
+    0xe0,
+    0xe0,
+    0xe0,
+    0xe0,
+    0xe0,
+    0xe0,
+    0xe0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x27 = { IMAGE_FORMAT_MONOCHROME, 3, 14, imagedata_font_Vivaldi_12_char_0x27};
+static const U8 imagedata_font_Vivaldi_12_char_0x28[14] =
+{
+    0xf8,
+    0xf8,
+    0xf0,
+    0xe8,
+    0xd8,
+    0xd8,
+    0xb8,
+    0xb8,
+    0xb8,
+    0xb8,
+    0xb8,
+    0xb8,
+    0xf8,
+    0xf8
+};
+static const IMAGE image_font_Vivaldi_12_char_0x28 = { IMAGE_FORMAT_MONOCHROME, 5, 14, imagedata_font_Vivaldi_12_char_0x28};
+static const U8 imagedata_font_Vivaldi_12_char_0x29[14] =
+{
+    0xf0,
+    0xf0,
+    0xd0,
+    0xe0,
+    0xe0,
+    0xe0,
+    0xe0,
+    0xd0,
+    0xd0,
+    0xb0,
+    0x70,
+    0x70,
+    0xf0,
+    0xf0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x29 = { IMAGE_FORMAT_MONOCHROME, 4, 14, imagedata_font_Vivaldi_12_char_0x29};
+static const U8 imagedata_font_Vivaldi_12_char_0x2a[14] =
+{
+    0xfc,
+    0xfc,
+    0xfc,
+    0xe4,
+    0xf0,
+    0xe4,
+    0xf4,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc
+};
+static const IMAGE image_font_Vivaldi_12_char_0x2a = { IMAGE_FORMAT_MONOCHROME, 6, 14, imagedata_font_Vivaldi_12_char_0x2a};
+static const U8 imagedata_font_Vivaldi_12_char_0x2b[14] =
+{
+    0xf8,
+    0xf8,
+    0xf8,
+    0xf8,
+    0xf8,
+    0xf8,
+    0xe8,
+    0x80,
+    0xd8,
+    0xd8,
+    0xf8,
+    0xf8,
+    0xf8,
+    0xf8
+};
+static const IMAGE image_font_Vivaldi_12_char_0x2b = { IMAGE_FORMAT_MONOCHROME, 5, 14, imagedata_font_Vivaldi_12_char_0x2b};
+static const U8 imagedata_font_Vivaldi_12_char_0x2c[14] =
+{
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0x40,
+    0x40,
+    0xc0,
+    0xc0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x2c = { IMAGE_FORMAT_MONOCHROME, 2, 14, imagedata_font_Vivaldi_12_char_0x2c};
+static const U8 imagedata_font_Vivaldi_12_char_0x2d[14] =
+{
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0x00,
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x2d = { IMAGE_FORMAT_MONOCHROME, 2, 14, imagedata_font_Vivaldi_12_char_0x2d};
+static const U8 imagedata_font_Vivaldi_12_char_0x2e[14] =
+{
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0x40,
+    0xc0,
+    0xc0,
+    0xc0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x2e = { IMAGE_FORMAT_MONOCHROME, 2, 14, imagedata_font_Vivaldi_12_char_0x2e};
+static const U8 imagedata_font_Vivaldi_12_char_0x2f[14] =
+{
+    0xfc,
+    0xfc,
+    0xf8,
+    0xf4,
+    0xf4,
+    0xec,
+    0xdc,
+    0xdc,
+    0xbc,
+    0x7c,
+    0x7c,
+    0xfc,
+    0xfc,
+    0xfc
+};
+static const IMAGE image_font_Vivaldi_12_char_0x2f = { IMAGE_FORMAT_MONOCHROME, 6, 14, imagedata_font_Vivaldi_12_char_0x2f};
+static const U8 imagedata_font_Vivaldi_12_char_0x30[14] =
+{
+    0xfc,
+    0xfc,
+    0xfc,
+    0xf0,
+    0xc8,
+    0xd8,
+    0xb8,
+    0xb4,
+    0xb4,
+    0xac,
+    0x8c,
+    0xfc,
+    0xfc,
+    0xfc
+};
+static const IMAGE image_font_Vivaldi_12_char_0x30 = { IMAGE_FORMAT_MONOCHROME, 6, 14, imagedata_font_Vivaldi_12_char_0x30};
+static const U8 imagedata_font_Vivaldi_12_char_0x31[14] =
+{
+    0xf8,
+    0xf8,
+    0xf8,
+    0xf0,
+    0xe0,
+    0xe8,
+    0xe8,
+    0xe8,
+    0xd8,
+    0xd8,
+    0xb8,
+    0xf8,
+    0xf8,
+    0xf8
+};
+static const IMAGE image_font_Vivaldi_12_char_0x31 = { IMAGE_FORMAT_MONOCHROME, 5, 14, imagedata_font_Vivaldi_12_char_0x31};
+static const U8 imagedata_font_Vivaldi_12_char_0x32[14] =
+{
+    0xfc,
+    0xfc,
+    0xfc,
+    0xe0,
+    0xd8,
+    0xf8,
+    0xf4,
+    0xec,
+    0x9c,
+    0x7c,
+    0x04,
+    0xfc,
+    0xfc,
+    0xfc
+};
+static const IMAGE image_font_Vivaldi_12_char_0x32 = { IMAGE_FORMAT_MONOCHROME, 6, 14, imagedata_font_Vivaldi_12_char_0x32};
+static const U8 imagedata_font_Vivaldi_12_char_0x33[14] =
+{
+    0xfc,
+    0xfc,
+    0xfc,
+    0xe0,
+    0xd8,
+    0xf4,
+    0xcc,
+    0xf4,
+    0xf4,
+    0x64,
+    0x0c,
+    0xfc,
+    0xfc,
+    0xfc
+};
+static const IMAGE image_font_Vivaldi_12_char_0x33 = { IMAGE_FORMAT_MONOCHROME, 6, 14, imagedata_font_Vivaldi_12_char_0x33};
+static const U8 imagedata_font_Vivaldi_12_char_0x34[14] =
+{
+    0xfc,
+    0xfc,
+    0xfc,
+    0xec,
+    0xe8,
+    0xd4,
+    0xcc,
+    0xa8,
+    0x44,
+    0xdc,
+    0xdc,
+    0xfc,
+    0xfc,
+    0xfc
+};
+static const IMAGE image_font_Vivaldi_12_char_0x34 = { IMAGE_FORMAT_MONOCHROME, 6, 14, imagedata_font_Vivaldi_12_char_0x34};
+static const U8 imagedata_font_Vivaldi_12_char_0x35[14] =
+{
+    0xfe,
+    0xfe,
+    0xfe,
+    0xe0,
+    0xde,
+    0xde,
+    0xde,
+    0xee,
+    0xee,
+    0xee,
+    0x1e,
+    0xfe,
+    0xfe,
+    0xfe
+};
+static const IMAGE image_font_Vivaldi_12_char_0x35 = { IMAGE_FORMAT_MONOCHROME, 7, 14, imagedata_font_Vivaldi_12_char_0x35};
+static const U8 imagedata_font_Vivaldi_12_char_0x36[14] =
+{
+    0xfe,
+    0xfe,
+    0xfe,
+    0xfc,
+    0xf2,
+    0xee,
+    0xde,
+    0xa6,
+    0x96,
+    0xb6,
+    0x8e,
+    0xfe,
+    0xfe,
+    0xfe
+};
+static const IMAGE image_font_Vivaldi_12_char_0x36 = { IMAGE_FORMAT_MONOCHROME, 7, 14, imagedata_font_Vivaldi_12_char_0x36};
+static const U8 imagedata_font_Vivaldi_12_char_0x37[14] =
+{
+    0xfe,
+    0xfe,
+    0xfe,
+    0xe0,
+    0xda,
+    0xfa,
+    0xf6,
+    0xee,
+    0xde,
+    0xbe,
+    0xbe,
+    0xfe,
+    0xfe,
+    0xfe
+};
+static const IMAGE image_font_Vivaldi_12_char_0x37 = { IMAGE_FORMAT_MONOCHROME, 7, 14, imagedata_font_Vivaldi_12_char_0x37};
+static const U8 imagedata_font_Vivaldi_12_char_0x38[14] =
+{
+    0xfc,
+    0xfc,
+    0xfc,
+    0xe0,
+    0xd8,
+    0xd4,
+    0xcc,
+    0xac,
+    0x74,
+    0x74,
+    0x0c,
+    0xfc,
+    0xfc,
+    0xfc
+};
+static const IMAGE image_font_Vivaldi_12_char_0x38 = { IMAGE_FORMAT_MONOCHROME, 6, 14, imagedata_font_Vivaldi_12_char_0x38};
+static const U8 imagedata_font_Vivaldi_12_char_0x39[14] =
+{
+    0xfc,
+    0xfc,
+    0xfc,
+    0xe0,
+    0xd8,
+    0xd0,
+    0xc8,
+    0xf4,
+    0xec,
+    0xdc,
+    0x3c,
+    0xfc,
+    0xfc,
+    0xfc
+};
+static const IMAGE image_font_Vivaldi_12_char_0x39 = { IMAGE_FORMAT_MONOCHROME, 6, 14, imagedata_font_Vivaldi_12_char_0x39};
+static const U8 imagedata_font_Vivaldi_12_char_0x3a[14] =
+{
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0x80,
+    0xc0,
+    0x40,
+    0xc0,
+    0xc0,
+    0xc0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x3a = { IMAGE_FORMAT_MONOCHROME, 2, 14, imagedata_font_Vivaldi_12_char_0x3a};
+static const U8 imagedata_font_Vivaldi_12_char_0x3b[14] =
+{
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0xc0,
+    0x40,
+    0xc0,
+    0x40,
+    0x40,
+    0xc0,
+    0xc0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x3b = { IMAGE_FORMAT_MONOCHROME, 2, 14, imagedata_font_Vivaldi_12_char_0x3b};
+static const U8 imagedata_font_Vivaldi_12_char_0x3c[14] =
+{
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xe4,
+    0xdc,
+    0x3c,
+    0x9c,
+    0xcc,
+    0xf4,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc
+};
+static const IMAGE image_font_Vivaldi_12_char_0x3c = { IMAGE_FORMAT_MONOCHROME, 6, 14, imagedata_font_Vivaldi_12_char_0x3c};
+static const U8 imagedata_font_Vivaldi_12_char_0x3d[14] =
+{
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0x80,
+    0xfc,
+    0x04,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc
+};
+static const IMAGE image_font_Vivaldi_12_char_0x3d = { IMAGE_FORMAT_MONOCHROME, 6, 14, imagedata_font_Vivaldi_12_char_0x3d};
+static const U8 imagedata_font_Vivaldi_12_char_0x3e[14] =
+{
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xbc,
+    0xcc,
+    0xf4,
+    0xf0,
+    0xec,
+    0x9c,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc
+};
+static const IMAGE image_font_Vivaldi_12_char_0x3e = { IMAGE_FORMAT_MONOCHROME, 6, 14, imagedata_font_Vivaldi_12_char_0x3e};
+static const U8 imagedata_font_Vivaldi_12_char_0x3f[14] =
+{
+    0xfc,
+    0xfc,
+    0xfc,
+    0xc0,
+    0xb8,
+    0xf8,
+    0xf4,
+    0xec,
+    0x9c,
+    0xbc,
+    0xbc,
+    0xfc,
+    0xfc,
+    0xfc
+};
+static const IMAGE image_font_Vivaldi_12_char_0x3f = { IMAGE_FORMAT_MONOCHROME, 6, 14, imagedata_font_Vivaldi_12_char_0x3f};
+static const U8 imagedata_font_Vivaldi_12_char_0x40[28] =
+{
+    0xff, 0x80,
+    0xff, 0x80,
+    0xf8, 0x80,
+    0xe7, 0x00,
+    0xdf, 0x00,
+    0xb9, 0x00,
+    0xa2, 0x80,
+    0xa1, 0x80,
+    0xbf, 0x80,
+    0xbf, 0x80,
+    0xc3, 0x80,
+    0xff, 0x80,
+    0xff, 0x80,
+    0xff, 0x80
+};
+static const IMAGE image_font_Vivaldi_12_char_0x40 = { IMAGE_FORMAT_MONOCHROME, 9, 14, imagedata_font_Vivaldi_12_char_0x40};
+static const U8 imagedata_font_Vivaldi_12_char_0x41[28] =
+{
+    0xff, 0xc0,
+    0xff, 0xc0,
+    0xfe, 0xc0,
+    0xfe, 0xc0,
+    0xf8, 0xc0,
+    0xf6, 0xc0,
+    0xee, 0xc0,
+    0xd0, 0xc0,
+    0xbd, 0x40,
+    0x7d, 0x40,
+    0x03, 0x00,
+    0xff, 0xc0,
+    0xff, 0xc0,
+    0xff, 0xc0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x41 = { IMAGE_FORMAT_MONOCHROME, 10, 14, imagedata_font_Vivaldi_12_char_0x41};
+static const U8 imagedata_font_Vivaldi_12_char_0x42[28] =
+{
+    0xff, 0xfe,
+    0xff, 0xfe,
+    0xfb, 0xfe,
+    0xf8, 0x02,
+    0xff, 0xec,
+    0xc3, 0xec,
+    0x9d, 0x92,
+    0xbe, 0x80,
+    0xbf, 0x7c,
+    0x9e, 0xbc,
+    0xc1, 0xc2,
+    0xff, 0xfe,
+    0xff, 0xfe,
+    0xff, 0xfe
+};
+static const IMAGE image_font_Vivaldi_12_char_0x42 = { IMAGE_FORMAT_MONOCHROME, 15, 14, imagedata_font_Vivaldi_12_char_0x42};
+static const U8 imagedata_font_Vivaldi_12_char_0x43[28] =
+{
+    0xff, 0xe0,
+    0xff, 0xe0,
+    0xff, 0xe0,
+    0xf8, 0x20,
+    0xe7, 0xc0,
+    0xc3, 0xc0,
+    0xb8, 0x20,
+    0xbb, 0xe0,
+    0xbb, 0xe0,
+    0xb7, 0xe0,
+    0xcf, 0xe0,
+    0xff, 0xe0,
+    0xff, 0xe0,
+    0xff, 0xe0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x43 = { IMAGE_FORMAT_MONOCHROME, 11, 14, imagedata_font_Vivaldi_12_char_0x43};
+static const U8 imagedata_font_Vivaldi_12_char_0x44[28] =
+{
+    0xff, 0xfc,
+    0xff, 0xfc,
+    0xf7, 0xfc,
+    0xf8, 0x04,
+    0xff, 0xf0,
+    0xc7, 0xe8,
+    0xb3, 0x88,
+    0xb8, 0x58,
+    0xc5, 0xc4,
+    0xfe, 0xec,
+    0xff, 0x1c,
+    0xff, 0xfc,
+    0xff, 0xfc,
+    0xff, 0xfc
+};
+static const IMAGE image_font_Vivaldi_12_char_0x44 = { IMAGE_FORMAT_MONOCHROME, 14, 14, imagedata_font_Vivaldi_12_char_0x44};
+static const U8 imagedata_font_Vivaldi_12_char_0x45[28] =
+{
+    0xff, 0xfc,
+    0xff, 0xfc,
+    0xff, 0xfc,
+    0xf8, 0x0c,
+    0xe7, 0xbc,
+    0xdf, 0x7c,
+    0xbf, 0x1c,
+    0xbc, 0xbc,
+    0xb0, 0xbc,
+    0x9e, 0x38,
+    0xe0, 0xc4,
+    0xff, 0xfc,
+    0xff, 0xfc,
+    0xff, 0xfc
+};
+static const IMAGE image_font_Vivaldi_12_char_0x45 = { IMAGE_FORMAT_MONOCHROME, 14, 14, imagedata_font_Vivaldi_12_char_0x45};
+static const U8 imagedata_font_Vivaldi_12_char_0x46[28] =
+{
+    0xff, 0xfe,
+    0xff, 0xfe,
+    0xff, 0xfe,
+    0xff, 0xf8,
+    0xff, 0xf6,
+    0xff, 0xee,
+    0xff, 0xee,
+    0x86, 0x02,
+    0x39, 0x5e,
+    0x7e, 0x9e,
+    0x7f, 0x3e,
+    0x3f, 0xbe,
+    0x9f, 0x7e,
+    0xc0, 0xfe
+};
+static const IMAGE image_font_Vivaldi_12_char_0x46 = { IMAGE_FORMAT_MONOCHROME, 15, 14, imagedata_font_Vivaldi_12_char_0x46};
+static const U8 imagedata_font_Vivaldi_12_char_0x47[28] =
+{
+    0xff, 0xfc,
+    0xff, 0xfc,
+    0xff, 0xfc,
+    0xff, 0xcc,
+    0xff, 0x3c,
+    0xfe, 0xc0,
+    0xc2, 0xe4,
+    0x98, 0xe4,
+    0xbd, 0x14,
+    0xbe, 0xec,
+    0xbf, 0x5c,
+    0x9f, 0x1c,
+    0xcf, 0xbc,
+    0xe0, 0x7c
+};
+static const IMAGE image_font_Vivaldi_12_char_0x47 = { IMAGE_FORMAT_MONOCHROME, 14, 14, imagedata_font_Vivaldi_12_char_0x47};
+static const U8 imagedata_font_Vivaldi_12_char_0x48[42] =
+{
+    0xff, 0xff, 0xe0,
+    0xff, 0xff, 0xe0,
+    0xff, 0xfe, 0x00,
+    0xff, 0x8d, 0xc0,
+    0xff, 0xd3, 0xa0,
+    0xc2, 0x00, 0x60,
+    0x9c, 0x57, 0xe0,
+    0xbe, 0x37, 0xe0,
+    0xbf, 0x77, 0x60,
+    0xde, 0xf7, 0x60,
+    0xe1, 0xf8, 0xe0,
+    0xff, 0xff, 0xe0,
+    0xff, 0xff, 0xe0,
+    0xff, 0xff, 0xe0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x48 = { IMAGE_FORMAT_MONOCHROME, 19, 14, imagedata_font_Vivaldi_12_char_0x48};
+static const U8 imagedata_font_Vivaldi_12_char_0x49[28] =
+{
+    0xff, 0xf8,
+    0xff, 0xf8,
+    0xff, 0xf8,
+    0xfe, 0x00,
+    0xf9, 0xe8,
+    0xc0, 0xe8,
+    0xb5, 0x58,
+    0xb6, 0x58,
+    0xb7, 0x38,
+    0xdf, 0x78,
+    0xe0, 0xf8,
+    0xff, 0xf8,
+    0xff, 0xf8,
+    0xff, 0xf8
+};
+static const IMAGE image_font_Vivaldi_12_char_0x49 = { IMAGE_FORMAT_MONOCHROME, 13, 14, imagedata_font_Vivaldi_12_char_0x49};
+static const U8 imagedata_font_Vivaldi_12_char_0x4a[28] =
+{
+    0xff, 0xf0,
+    0xff, 0xf0,
+    0xff, 0xf0,
+    0xff, 0xc0,
+    0xff, 0xa0,
+    0xff, 0xa0,
+    0xff, 0x90,
+    0xc3, 0x90,
+    0xbc, 0xd0,
+    0x7f, 0x30,
+    0x7f, 0x70,
+    0x7f, 0x70,
+    0x9e, 0xf0,
+    0xc1, 0xf0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x4a = { IMAGE_FORMAT_MONOCHROME, 12, 14, imagedata_font_Vivaldi_12_char_0x4a};
+static const U8 imagedata_font_Vivaldi_12_char_0x4b[28] =
+{
+    0xff, 0xfe,
+    0xff, 0xfe,
+    0xff, 0xfe,
+    0xff, 0x90,
+    0xe1, 0xaa,
+    0xde, 0x36,
+    0xbf, 0x8e,
+    0xbf, 0x5e,
+    0xbc, 0x2e,
+    0xce, 0xf6,
+    0xe1, 0xf8,
+    0xff, 0xfe,
+    0xff, 0xfe,
+    0xff, 0xfe
+};
+static const IMAGE image_font_Vivaldi_12_char_0x4b = { IMAGE_FORMAT_MONOCHROME, 15, 14, imagedata_font_Vivaldi_12_char_0x4b};
+static const U8 imagedata_font_Vivaldi_12_char_0x4c[28] =
+{
+    0xff, 0xe0,
+    0xff, 0xe0,
+    0xff, 0xe0,
+    0xfe, 0x00,
+    0xf9, 0xc0,
+    0xf7, 0xc0,
+    0xc0, 0x20,
+    0x9f, 0xe0,
+    0x83, 0xe0,
+    0xb8, 0xe0,
+    0xc7, 0x00,
+    0xff, 0xe0,
+    0xff, 0xe0,
+    0xff, 0xe0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x4c = { IMAGE_FORMAT_MONOCHROME, 11, 14, imagedata_font_Vivaldi_12_char_0x4c};
+static const U8 imagedata_font_Vivaldi_12_char_0x4d[42] =
+{
+    0xff, 0xff, 0xe0,
+    0xff, 0xff, 0xe0,
+    0xff, 0xff, 0xe0,
+    0xff, 0xef, 0x80,
+    0xc3, 0xcf, 0x60,
+    0x9c, 0xde, 0xe0,
+    0xbe, 0x18, 0xe0,
+    0xbf, 0x99, 0xe0,
+    0xbf, 0x55, 0xe0,
+    0xde, 0xed, 0xe0,
+    0xe1, 0xdc, 0xe0,
+    0xff, 0xff, 0xe0,
+    0xff, 0xff, 0xe0,
+    0xff, 0xff, 0xe0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x4d = { IMAGE_FORMAT_MONOCHROME, 19, 14, imagedata_font_Vivaldi_12_char_0x4d};
+static const U8 imagedata_font_Vivaldi_12_char_0x4e[42] =
+{
+    0xff, 0xff, 0x80,
+    0xff, 0xff, 0x80,
+    0xfd, 0xff, 0x80,
+    0xfd, 0xfc, 0x00,
+    0xfe, 0x3b, 0x80,
+    0xc7, 0x77, 0x80,
+    0xb9, 0x0f, 0x80,
+    0xbe, 0xef, 0x80,
+    0xbe, 0xe7, 0x80,
+    0x9d, 0xe7, 0x80,
+    0xc3, 0xe7, 0x80,
+    0xff, 0xff, 0x80,
+    0xff, 0xff, 0x80,
+    0xff, 0xff, 0x80
+};
+static const IMAGE image_font_Vivaldi_12_char_0x4e = { IMAGE_FORMAT_MONOCHROME, 17, 14, imagedata_font_Vivaldi_12_char_0x4e};
+static const U8 imagedata_font_Vivaldi_12_char_0x4f[28] =
+{
+    0xff, 0xe0,
+    0xff, 0xe0,
+    0xff, 0xe0,
+    0xf8, 0x20,
+    0xe4, 0x20,
+    0xdb, 0x40,
+    0xb6, 0xc0,
+    0xb1, 0xc0,
+    0xbf, 0xa0,
+    0xdf, 0x60,
+    0xe0, 0xe0,
+    0xff, 0xe0,
+    0xff, 0xe0,
+    0xff, 0xe0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x4f = { IMAGE_FORMAT_MONOCHROME, 11, 14, imagedata_font_Vivaldi_12_char_0x4f};
+static const U8 imagedata_font_Vivaldi_12_char_0x50[28] =
+{
+    0xff, 0xf0,
+    0xff, 0xf0,
+    0xdf, 0xf0,
+    0xc0, 0x10,
+    0xfe, 0xe0,
+    0xf9, 0xe0,
+    0xf4, 0xc0,
+    0xf3, 0x10,
+    0xf7, 0xf0,
+    0xf0, 0xf0,
+    0xef, 0x10,
+    0xff, 0xf0,
+    0xff, 0xf0,
+    0xff, 0xf0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x50 = { IMAGE_FORMAT_MONOCHROME, 12, 14, imagedata_font_Vivaldi_12_char_0x50};
+static const U8 imagedata_font_Vivaldi_12_char_0x51[28] =
+{
+    0xff, 0xf0,
+    0xff, 0xf0,
+    0xff, 0xf0,
+    0xf8, 0x30,
+    0xe0, 0x30,
+    0xd3, 0x50,
+    0xb6, 0xd0,
+    0xb1, 0xd0,
+    0xbe, 0x30,
+    0xdf, 0xb0,
+    0xe0, 0x40,
+    0xff, 0xf0,
+    0xff, 0xf0,
+    0xff, 0xf0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x51 = { IMAGE_FORMAT_MONOCHROME, 12, 14, imagedata_font_Vivaldi_12_char_0x51};
+static const U8 imagedata_font_Vivaldi_12_char_0x52[28] =
+{
+    0xff, 0xf8,
+    0xff, 0xf8,
+    0xff, 0xf8,
+    0xfc, 0x08,
+    0xe3, 0xb0,
+    0xdf, 0x30,
+    0xb8, 0x88,
+    0xb7, 0x78,
+    0xb6, 0x98,
+    0x9e, 0xc8,
+    0xc1, 0xe0,
+    0xff, 0xf8,
+    0xff, 0xf8,
+    0xff, 0xf8
+};
+static const IMAGE image_font_Vivaldi_12_char_0x52 = { IMAGE_FORMAT_MONOCHROME, 13, 14, imagedata_font_Vivaldi_12_char_0x52};
+static const U8 imagedata_font_Vivaldi_12_char_0x53[28] =
+{
+    0xff, 0xfe,
+    0xff, 0xfe,
+    0xff, 0xfe,
+    0xe1, 0xc2,
+    0xee, 0xb6,
+    0xde, 0xae,
+    0xdf, 0x40,
+    0xdf, 0x5c,
+    0xcf, 0x5c,
+    0xe7, 0xba,
+    0xf0, 0x06,
+    0xff, 0xfe,
+    0xff, 0xfe,
+    0xff, 0xfe
+};
+static const IMAGE image_font_Vivaldi_12_char_0x53 = { IMAGE_FORMAT_MONOCHROME, 15, 14, imagedata_font_Vivaldi_12_char_0x53};
+static const U8 imagedata_font_Vivaldi_12_char_0x54[28] =
+{
+    0xff, 0xf8,
+    0xff, 0xf8,
+    0xff, 0xf8,
+    0xe0, 0x00,
+    0xdb, 0xd8,
+    0xbb, 0xf8,
+    0xb7, 0xf8,
+    0xf7, 0xd8,
+    0xf7, 0xd8,
+    0xf3, 0xb8,
+    0xf8, 0x78,
+    0xff, 0xf8,
+    0xff, 0xf8,
+    0xff, 0xf8
+};
+static const IMAGE image_font_Vivaldi_12_char_0x54 = { IMAGE_FORMAT_MONOCHROME, 13, 14, imagedata_font_Vivaldi_12_char_0x54};
+static const U8 imagedata_font_Vivaldi_12_char_0x55[28] =
+{
+    0xff, 0xfe,
+    0xff, 0xfe,
+    0xff, 0xfe,
+    0xf0, 0x78,
+    0xce, 0xf4,
+    0xbe, 0xea,
+    0xbe, 0xe6,
+    0xbe, 0xcc,
+    0xbd, 0xdc,
+    0xfd, 0x98,
+    0xfc, 0x42,
+    0xff, 0xfe,
+    0xff, 0xfe,
+    0xff, 0xfe
+};
+static const IMAGE image_font_Vivaldi_12_char_0x55 = { IMAGE_FORMAT_MONOCHROME, 15, 14, imagedata_font_Vivaldi_12_char_0x55};
+static const U8 imagedata_font_Vivaldi_12_char_0x56[28] =
+{
+    0xff, 0xff,
+    0xff, 0xff,
+    0xf1, 0xff,
+    0xee, 0xc0,
+    0xdf, 0x79,
+    0xdf, 0x7b,
+    0xdf, 0xa3,
+    0xcf, 0x97,
+    0xe2, 0x2f,
+    0xfe, 0x9f,
+    0xfe, 0xbf,
+    0xff, 0xff,
+    0xff, 0xff,
+    0xff, 0xff
+};
+static const IMAGE image_font_Vivaldi_12_char_0x56 = { IMAGE_FORMAT_MONOCHROME, 16, 14, imagedata_font_Vivaldi_12_char_0x56};
+static const U8 imagedata_font_Vivaldi_12_char_0x57[42] =
+{
+    0xff, 0xff, 0xc0,
+    0xff, 0xff, 0xc0,
+    0xff, 0xff, 0xc0,
+    0xf0, 0x7e, 0x00,
+    0xcf, 0xb9, 0x80,
+    0xbc, 0xc4, 0x40,
+    0xbe, 0xc0, 0xc0,
+    0xbe, 0x1b, 0xc0,
+    0xbe, 0x97, 0xc0,
+    0xde, 0x57, 0xc0,
+    0xe2, 0xcf, 0xc0,
+    0xff, 0xff, 0xc0,
+    0xff, 0xff, 0xc0,
+    0xff, 0xff, 0xc0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x57 = { IMAGE_FORMAT_MONOCHROME, 18, 14, imagedata_font_Vivaldi_12_char_0x57};
+static const U8 imagedata_font_Vivaldi_12_char_0x58[28] =
+{
+    0xff, 0xff,
+    0xff, 0xff,
+    0xff, 0xff,
+    0xfc, 0x78,
+    0xff, 0x66,
+    0xc7, 0x9d,
+    0xba, 0x03,
+    0xbc, 0xbf,
+    0xbc, 0x5f,
+    0x9e, 0xdf,
+    0xc1, 0xef,
+    0xff, 0xff,
+    0xff, 0xff,
+    0xff, 0xff
+};
+static const IMAGE image_font_Vivaldi_12_char_0x58 = { IMAGE_FORMAT_MONOCHROME, 16, 14, imagedata_font_Vivaldi_12_char_0x58};
+static const U8 imagedata_font_Vivaldi_12_char_0x59[42] =
+{
+    0xff, 0xff, 0xc0,
+    0xff, 0xff, 0xc0,
+    0xff, 0xff, 0xc0,
+    0xf0, 0xfc, 0x00,
+    0xee, 0x7b, 0x80,
+    0xdf, 0x67, 0x80,
+    0xdf, 0x5f, 0x40,
+    0xde, 0x20, 0xc0,
+    0xdd, 0x3f, 0xc0,
+    0xed, 0x7f, 0xc0,
+    0xf5, 0x7f, 0xc0,
+    0xfe, 0xff, 0xc0,
+    0xfe, 0xff, 0xc0,
+    0xfe, 0x7f, 0xc0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x59 = { IMAGE_FORMAT_MONOCHROME, 18, 14, imagedata_font_Vivaldi_12_char_0x59};
+static const U8 imagedata_font_Vivaldi_12_char_0x5a[28] =
+{
+    0xff, 0xf0,
+    0xff, 0xf0,
+    0xff, 0xf0,
+    0xfb, 0xb0,
+    0xf4, 0x70,
+    0xfd, 0xf0,
+    0xc2, 0x70,
+    0xb8, 0xf0,
+    0x67, 0x10,
+    0x5e, 0x90,
+    0x3d, 0xc0,
+    0x83, 0xf0,
+    0xff, 0xf0,
+    0xff, 0xf0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x5a = { IMAGE_FORMAT_MONOCHROME, 12, 14, imagedata_font_Vivaldi_12_char_0x5a};
+static const U8 imagedata_font_Vivaldi_12_char_0x5b[14] =
+{
+    0xfc,
+    0xfc,
+    0xf0,
+    0xec,
+    0xec,
+    0xdc,
+    0xdc,
+    0xdc,
+    0xbc,
+    0xbc,
+    0x7c,
+    0x1c,
+    0xfc,
+    0xfc
+};
+static const IMAGE image_font_Vivaldi_12_char_0x5b = { IMAGE_FORMAT_MONOCHROME, 6, 14, imagedata_font_Vivaldi_12_char_0x5b};
+static const U8 imagedata_font_Vivaldi_12_char_0x5c[14] =
+{
+    0xf0,
+    0xf0,
+    0xd0,
+    0xd0,
+    0xd0,
+    0xd0,
+    0xd0,
+    0xd0,
+    0xd0,
+    0xd0,
+    0xd0,
+    0xd0,
+    0xf0,
+    0xf0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x5c = { IMAGE_FORMAT_MONOCHROME, 4, 14, imagedata_font_Vivaldi_12_char_0x5c};
+static const U8 imagedata_font_Vivaldi_12_char_0x5d[14] =
+{
+    0xf8,
+    0xf8,
+    0xf0,
+    0xe0,
+    0xf0,
+    0xe8,
+    0xe8,
+    0xe8,
+    0xd8,
+    0xd8,
+    0xd8,
+    0x38,
+    0xf8,
+    0xf8
+};
+static const IMAGE image_font_Vivaldi_12_char_0x5d = { IMAGE_FORMAT_MONOCHROME, 5, 14, imagedata_font_Vivaldi_12_char_0x5d};
+static const U8 imagedata_font_Vivaldi_12_char_0x5e[14] =
+{
+    0xfc,
+    0xfc,
+    0xfc,
+    0xcc,
+    0xcc,
+    0xb4,
+    0xb4,
+    0x78,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc
+};
+static const IMAGE image_font_Vivaldi_12_char_0x5e = { IMAGE_FORMAT_MONOCHROME, 6, 14, imagedata_font_Vivaldi_12_char_0x5e};
+static const U8 imagedata_font_Vivaldi_12_char_0x5f[14] =
+{
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0x00,
+    0xfc
+};
+static const IMAGE image_font_Vivaldi_12_char_0x5f = { IMAGE_FORMAT_MONOCHROME, 6, 14, imagedata_font_Vivaldi_12_char_0x5f};
+static const U8 imagedata_font_Vivaldi_12_char_0x60[14] =
+{
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xe4,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc
+};
+static const IMAGE image_font_Vivaldi_12_char_0x60 = { IMAGE_FORMAT_MONOCHROME, 6, 14, imagedata_font_Vivaldi_12_char_0x60};
+static const U8 imagedata_font_Vivaldi_12_char_0x61[14] =
+{
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xf0,
+    0xcc,
+    0x1c,
+    0x4c,
+    0x0c,
+    0xfc,
+    0xfc,
+    0xfc
+};
+static const IMAGE image_font_Vivaldi_12_char_0x61 = { IMAGE_FORMAT_MONOCHROME, 6, 14, imagedata_font_Vivaldi_12_char_0x61};
+static const U8 imagedata_font_Vivaldi_12_char_0x62[14] =
+{
+    0xf8,
+    0xf8,
+    0xf8,
+    0xc8,
+    0xd8,
+    0xd8,
+    0xa0,
+    0xd0,
+    0xa8,
+    0x58,
+    0x38,
+    0xf8,
+    0xf8,
+    0xf8
+};
+static const IMAGE image_font_Vivaldi_12_char_0x62 = { IMAGE_FORMAT_MONOCHROME, 5, 14, imagedata_font_Vivaldi_12_char_0x62};
+static const U8 imagedata_font_Vivaldi_12_char_0x63[14] =
+{
+    0xf0,
+    0xf0,
+    0xf0,
+    0xf0,
+    0xf0,
+    0xf0,
+    0xc0,
+    0xa0,
+    0x70,
+    0x60,
+    0x10,
+    0xf0,
+    0xf0,
+    0xf0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x63 = { IMAGE_FORMAT_MONOCHROME, 4, 14, imagedata_font_Vivaldi_12_char_0x63};
+static const U8 imagedata_font_Vivaldi_12_char_0x64[14] =
+{
+    0xfc,
+    0xfc,
+    0xfc,
+    0xf8,
+    0xf0,
+    0xf4,
+    0xe4,
+    0x94,
+    0x6c,
+    0x0c,
+    0x6c,
+    0xfc,
+    0xfc,
+    0xfc
+};
+static const IMAGE image_font_Vivaldi_12_char_0x64 = { IMAGE_FORMAT_MONOCHROME, 6, 14, imagedata_font_Vivaldi_12_char_0x64};
+static const U8 imagedata_font_Vivaldi_12_char_0x65[14] =
+{
+    0xf0,
+    0xf0,
+    0xf0,
+    0xf0,
+    0xf0,
+    0xf0,
+    0xc0,
+    0x90,
+    0x50,
+    0x50,
+    0x30,
+    0xf0,
+    0xf0,
+    0xf0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x65 = { IMAGE_FORMAT_MONOCHROME, 4, 14, imagedata_font_Vivaldi_12_char_0x65};
+static const U8 imagedata_font_Vivaldi_12_char_0x66[14] =
+{
+    0xfc,
+    0xfc,
+    0xfc,
+    0xf0,
+    0xcc,
+    0xdc,
+    0x9c,
+    0xbc,
+    0xbc,
+    0x7c,
+    0x7c,
+    0xfc,
+    0xfc,
+    0xfc
+};
+static const IMAGE image_font_Vivaldi_12_char_0x66 = { IMAGE_FORMAT_MONOCHROME, 6, 14, imagedata_font_Vivaldi_12_char_0x66};
+static const U8 imagedata_font_Vivaldi_12_char_0x67[14] =
+{
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xe0,
+    0x8c,
+    0x6c,
+    0x4c,
+    0x1c,
+    0xdc,
+    0xbc,
+    0x7c
+};
+static const IMAGE image_font_Vivaldi_12_char_0x67 = { IMAGE_FORMAT_MONOCHROME, 6, 14, imagedata_font_Vivaldi_12_char_0x67};
+static const U8 imagedata_font_Vivaldi_12_char_0x68[14] =
+{
+    0xf8,
+    0xf8,
+    0xf8,
+    0xd8,
+    0xd8,
+    0xb8,
+    0xb0,
+    0x88,
+    0x28,
+    0x58,
+    0x48,
+    0xf8,
+    0xf8,
+    0xf8
+};
+static const IMAGE image_font_Vivaldi_12_char_0x68 = { IMAGE_FORMAT_MONOCHROME, 5, 14, imagedata_font_Vivaldi_12_char_0x68};
+static const U8 imagedata_font_Vivaldi_12_char_0x69[14] =
+{
+    0xe0,
+    0xe0,
+    0xe0,
+    0xe0,
+    0xc0,
+    0xe0,
+    0xa0,
+    0xa0,
+    0x60,
+    0x60,
+    0x20,
+    0xe0,
+    0xe0,
+    0xe0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x69 = { IMAGE_FORMAT_MONOCHROME, 3, 14, imagedata_font_Vivaldi_12_char_0x69};
+static const U8 imagedata_font_Vivaldi_12_char_0x6a[14] =
+{
+    0xf0,
+    0xf0,
+    0xf0,
+    0xf0,
+    0xe0,
+    0xf0,
+    0x90,
+    0xb0,
+    0xb0,
+    0x70,
+    0xf0,
+    0xf0,
+    0xf0,
+    0xf0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x6a = { IMAGE_FORMAT_MONOCHROME, 4, 14, imagedata_font_Vivaldi_12_char_0x6a};
+static const U8 imagedata_font_Vivaldi_12_char_0x6b[14] =
+{
+    0xf8,
+    0xf8,
+    0xf8,
+    0xd8,
+    0xd8,
+    0xd8,
+    0xa0,
+    0x88,
+    0x38,
+    0x48,
+    0x48,
+    0xf8,
+    0xf8,
+    0xf8
+};
+static const IMAGE image_font_Vivaldi_12_char_0x6b = { IMAGE_FORMAT_MONOCHROME, 5, 14, imagedata_font_Vivaldi_12_char_0x6b};
+static const U8 imagedata_font_Vivaldi_12_char_0x6c[14] =
+{
+    0xf0,
+    0xf0,
+    0xf0,
+    0xc0,
+    0xd0,
+    0xd0,
+    0xb0,
+    0xb0,
+    0x70,
+    0x70,
+    0x30,
+    0xf0,
+    0xf0,
+    0xf0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x6c = { IMAGE_FORMAT_MONOCHROME, 4, 14, imagedata_font_Vivaldi_12_char_0x6c};
+static const U8 imagedata_font_Vivaldi_12_char_0x6d[14] =
+{
+    0xfe,
+    0xfe,
+    0xfe,
+    0xfe,
+    0xfe,
+    0xfe,
+    0xa4,
+    0x82,
+    0xaa,
+    0x66,
+    0x52,
+    0xfe,
+    0xfe,
+    0xfe
+};
+static const IMAGE image_font_Vivaldi_12_char_0x6d = { IMAGE_FORMAT_MONOCHROME, 7, 14, imagedata_font_Vivaldi_12_char_0x6d};
+static const U8 imagedata_font_Vivaldi_12_char_0x6e[14] =
+{
+    0xf8,
+    0xf8,
+    0xf8,
+    0xf8,
+    0xf8,
+    0xf8,
+    0xb0,
+    0x88,
+    0xa8,
+    0x58,
+    0x48,
+    0xf8,
+    0xf8,
+    0xf8
+};
+static const IMAGE image_font_Vivaldi_12_char_0x6e = { IMAGE_FORMAT_MONOCHROME, 5, 14, imagedata_font_Vivaldi_12_char_0x6e};
+static const U8 imagedata_font_Vivaldi_12_char_0x6f[14] =
+{
+    0xf0,
+    0xf0,
+    0xf0,
+    0xf0,
+    0xf0,
+    0xf0,
+    0xc0,
+    0x80,
+    0x60,
+    0x50,
+    0x30,
+    0xf0,
+    0xf0,
+    0xf0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x6f = { IMAGE_FORMAT_MONOCHROME, 4, 14, imagedata_font_Vivaldi_12_char_0x6f};
+static const U8 imagedata_font_Vivaldi_12_char_0x70[14] =
+{
+    0xf0,
+    0xf0,
+    0xf0,
+    0xf0,
+    0xf0,
+    0xd0,
+    0x80,
+    0x20,
+    0x60,
+    0x50,
+    0x30,
+    0xf0,
+    0xf0,
+    0xf0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x70 = { IMAGE_FORMAT_MONOCHROME, 4, 14, imagedata_font_Vivaldi_12_char_0x70};
+static const U8 imagedata_font_Vivaldi_12_char_0x71[14] =
+{
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xe0,
+    0xcc,
+    0x1c,
+    0x4c,
+    0x1c,
+    0xdc,
+    0xbc,
+    0xbc
+};
+static const IMAGE image_font_Vivaldi_12_char_0x71 = { IMAGE_FORMAT_MONOCHROME, 6, 14, imagedata_font_Vivaldi_12_char_0x71};
+static const U8 imagedata_font_Vivaldi_12_char_0x72[14] =
+{
+    0xf0,
+    0xf0,
+    0xf0,
+    0xf0,
+    0xf0,
+    0xf0,
+    0xa0,
+    0x90,
+    0xb0,
+    0x70,
+    0x70,
+    0xf0,
+    0xf0,
+    0xf0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x72 = { IMAGE_FORMAT_MONOCHROME, 4, 14, imagedata_font_Vivaldi_12_char_0x72};
+static const U8 imagedata_font_Vivaldi_12_char_0x73[14] =
+{
+    0xf0,
+    0xf0,
+    0xf0,
+    0xf0,
+    0xf0,
+    0xf0,
+    0xc0,
+    0xb0,
+    0xb0,
+    0xb0,
+    0x70,
+    0xf0,
+    0xf0,
+    0xf0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x73 = { IMAGE_FORMAT_MONOCHROME, 4, 14, imagedata_font_Vivaldi_12_char_0x73};
+static const U8 imagedata_font_Vivaldi_12_char_0x74[14] =
+{
+    0xe0,
+    0xe0,
+    0xe0,
+    0xe0,
+    0xe0,
+    0xc0,
+    0x80,
+    0xa0,
+    0xa0,
+    0x60,
+    0x20,
+    0xe0,
+    0xe0,
+    0xe0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x74 = { IMAGE_FORMAT_MONOCHROME, 3, 14, imagedata_font_Vivaldi_12_char_0x74};
+static const U8 imagedata_font_Vivaldi_12_char_0x75[14] =
+{
+    0xf8,
+    0xf8,
+    0xf8,
+    0xf8,
+    0xf8,
+    0xf8,
+    0xb0,
+    0xa8,
+    0x68,
+    0x18,
+    0x48,
+    0xf8,
+    0xf8,
+    0xf8
+};
+static const IMAGE image_font_Vivaldi_12_char_0x75 = { IMAGE_FORMAT_MONOCHROME, 5, 14, imagedata_font_Vivaldi_12_char_0x75};
+static const U8 imagedata_font_Vivaldi_12_char_0x76[14] =
+{
+    0xf8,
+    0xf8,
+    0xf8,
+    0xf8,
+    0xf8,
+    0xf8,
+    0xa0,
+    0x88,
+    0xa8,
+    0x58,
+    0x38,
+    0xf8,
+    0xf8,
+    0xf8
+};
+static const IMAGE image_font_Vivaldi_12_char_0x76 = { IMAGE_FORMAT_MONOCHROME, 5, 14, imagedata_font_Vivaldi_12_char_0x76};
+static const U8 imagedata_font_Vivaldi_12_char_0x77[14] =
+{
+    0xfe,
+    0xfe,
+    0xfe,
+    0xfe,
+    0xfe,
+    0xfe,
+    0xa8,
+    0xa2,
+    0x86,
+    0x8e,
+    0x5e,
+    0xfe,
+    0xfe,
+    0xfe
+};
+static const IMAGE image_font_Vivaldi_12_char_0x77 = { IMAGE_FORMAT_MONOCHROME, 7, 14, imagedata_font_Vivaldi_12_char_0x77};
+static const U8 imagedata_font_Vivaldi_12_char_0x78[14] =
+{
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xfc,
+    0xc0,
+    0x1c,
+    0x8c,
+    0xd4,
+    0x0c,
+    0xfc,
+    0xfc,
+    0xfc
+};
+static const IMAGE image_font_Vivaldi_12_char_0x78 = { IMAGE_FORMAT_MONOCHROME, 6, 14, imagedata_font_Vivaldi_12_char_0x78};
+static const U8 imagedata_font_Vivaldi_12_char_0x79[14] =
+{
+    0xf8,
+    0xf8,
+    0xf8,
+    0xf8,
+    0xf8,
+    0xf8,
+    0xb0,
+    0x80,
+    0xa8,
+    0x68,
+    0x58,
+    0x38,
+    0xf8,
+    0x78
+};
+static const IMAGE image_font_Vivaldi_12_char_0x79 = { IMAGE_FORMAT_MONOCHROME, 5, 14, imagedata_font_Vivaldi_12_char_0x79};
+static const U8 imagedata_font_Vivaldi_12_char_0x7a[14] =
+{
+    0xf8,
+    0xf8,
+    0xf8,
+    0xf8,
+    0xf8,
+    0xf8,
+    0xc0,
+    0x28,
+    0xe8,
+    0x08,
+    0x98,
+    0xf8,
+    0xf8,
+    0xf8
+};
+static const IMAGE image_font_Vivaldi_12_char_0x7a = { IMAGE_FORMAT_MONOCHROME, 5, 14, imagedata_font_Vivaldi_12_char_0x7a};
+static const U8 imagedata_font_Vivaldi_12_char_0x7b[14] =
+{
+    0xfc,
+    0xfc,
+    0xf8,
+    0xf4,
+    0xec,
+    0xdc,
+    0xbc,
+    0xbc,
+    0xbc,
+    0xbc,
+    0xbc,
+    0x9c,
+    0xfc,
+    0xfc
+};
+static const IMAGE image_font_Vivaldi_12_char_0x7b = { IMAGE_FORMAT_MONOCHROME, 6, 14, imagedata_font_Vivaldi_12_char_0x7b};
+static const U8 imagedata_font_Vivaldi_12_char_0x7c[14] =
+{
+    0xfc,
+    0xfc,
+    0xfc,
+    0xec,
+    0xec,
+    0xec,
+    0xec,
+    0xec,
+    0xec,
+    0xec,
+    0xec,
+    0xec,
+    0xec,
+    0xfc
+};
+static const IMAGE image_font_Vivaldi_12_char_0x7c = { IMAGE_FORMAT_MONOCHROME, 6, 14, imagedata_font_Vivaldi_12_char_0x7c};
+static const U8 imagedata_font_Vivaldi_12_char_0x7d[14] =
+{
+    0xf0,
+    0xf0,
+    0xe0,
+    0xe0,
+    0xe0,
+    0xe0,
+    0xe0,
+    0xd0,
+    0xd0,
+    0xb0,
+    0xb0,
+    0x70,
+    0xf0,
+    0xf0
+};
+static const IMAGE image_font_Vivaldi_12_char_0x7d = { IMAGE_FORMAT_MONOCHROME, 4, 14, imagedata_font_Vivaldi_12_char_0x7d};
+static const U8 imagedata_font_Vivaldi_12_char_0x7e[14] =
+{
+    0xff,
+    0xff,
+    0xc1,
+    0xbf,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff
+};
+static const IMAGE image_font_Vivaldi_12_char_0x7e = { IMAGE_FORMAT_MONOCHROME, 8, 14, imagedata_font_Vivaldi_12_char_0x7e};
+//------------------------------------------------------------------------------------------------//
+//reference stream
+static const U8 reference_stream_font_Vivaldi_12[] =
+{
+0x20,	// character: ' '
+0x21,	// character: '!'
+0x22,	// character: '"'
+0x23,	// character: '#'
+0x24,	// character: '$'
+0x25,	// character: '%'
+0x26,	// character: '&'
+0x27,	// character: '''
+0x28,	// character: '('
+0x29,	// character: ')'
+0x2a,	// character: '*'
+0x2b,	// character: '+'
+0x2c,	// character: ','
+0x2d,	// character: '-'
+0x2e,	// character: '.'
+0x2f,	// character: '/'
+0x30,	// character: '0'
+0x31,	// character: '1'
+0x32,	// character: '2'
+0x33,	// character: '3'
+0x34,	// character: '4'
+0x35,	// character: '5'
+0x36,	// character: '6'
+0x37,	// character: '7'
+0x38,	// character: '8'
+0x39,	// character: '9'
+0x3a,	// character: ':'
+0x3b,	// character: ';'
+0x3c,	// character: '<'
+0x3d,	// character: '='
+0x3e,	// character: '>'
+0x3f,	// character: '?'
+0x40,	// character: '(a)'
+0x41,	// character: 'A'
+0x42,	// character: 'B'
+0x43,	// character: 'C'
+0x44,	// character: 'D'
+0x45,	// character: 'E'
+0x46,	// character: 'F'
+0x47,	// character: 'G'
+0x48,	// character: 'H'
+0x49,	// character: 'I'
+0x4a,	// character: 'J'
+0x4b,	// character: 'K'
+0x4c,	// character: 'L'
+0x4d,	// character: 'M'
+0x4e,	// character: 'N'
+0x4f,	// character: 'O'
+0x50,	// character: 'P'
+0x51,	// character: 'Q'
+0x52,	// character: 'R'
+0x53,	// character: 'S'
+0x54,	// character: 'T'
+0x55,	// character: 'U'
+0x56,	// character: 'V'
+0x57,	// character: 'W'
+0x58,	// character: 'X'
+0x59,	// character: 'Y'
+0x5a,	// character: 'Z'
+0x5b,	// character: '['
+0x5c,	// character: '\'
+0x5d,	// character: ']'
+0x5e,	// character: '^'
+0x5f,	// character: '_'
+0x60,	// character: '`'
+0x61,	// character: 'a'
+0x62,	// character: 'b'
+0x63,	// character: 'c'
+0x64,	// character: 'd'
+0x65,	// character: 'e'
+0x66,	// character: 'f'
+0x67,	// character: 'g'
+0x68,	// character: 'h'
+0x69,	// character: 'i'
+0x6a,	// character: 'j'
+0x6b,	// character: 'k'
+0x6c,	// character: 'l'
+0x6d,	// character: 'm'
+0x6e,	// character: 'n'
+0x6f,	// character: 'o'
+0x70,	// character: 'p'
+0x71,	// character: 'q'
+0x72,	// character: 'r'
+0x73,	// character: 's'
+0x74,	// character: 't'
+0x75,	// character: 'u'
+0x76,	// character: 'v'
+0x77,	// character: 'w'
+0x78,	// character: 'x'
+0x79,	// character: 'y'
+0x7a,	// character: 'z'
+0x7b,	// character: '{'
+0x7c,	// character: '|'
+0x7d,	// character: '}'
+0x7e	// character: '~'
+};
+//------------------------------------------------------------------------------------------------//
+//image stream
+static const IMAGE* image_stream_font_Vivaldi_12[] =
+{
+&image_font_Vivaldi_12_char_0x20,	// character: ' '
+&image_font_Vivaldi_12_char_0x21,	// character: '!'
+&image_font_Vivaldi_12_char_0x22,	// character: '"'
+&image_font_Vivaldi_12_char_0x23,	// character: '#'
+&image_font_Vivaldi_12_char_0x24,	// character: '$'
+&image_font_Vivaldi_12_char_0x25,	// character: '%'
+&image_font_Vivaldi_12_char_0x26,	// character: '&'
+&image_font_Vivaldi_12_char_0x27,	// character: '''
+&image_font_Vivaldi_12_char_0x28,	// character: '('
+&image_font_Vivaldi_12_char_0x29,	// character: ')'
+&image_font_Vivaldi_12_char_0x2a,	// character: '*'
+&image_font_Vivaldi_12_char_0x2b,	// character: '+'
+&image_font_Vivaldi_12_char_0x2c,	// character: ','
+&image_font_Vivaldi_12_char_0x2d,	// character: '-'
+&image_font_Vivaldi_12_char_0x2e,	// character: '.'
+&image_font_Vivaldi_12_char_0x2f,	// character: '/'
+&image_font_Vivaldi_12_char_0x30,	// character: '0'
+&image_font_Vivaldi_12_char_0x31,	// character: '1'
+&image_font_Vivaldi_12_char_0x32,	// character: '2'
+&image_font_Vivaldi_12_char_0x33,	// character: '3'
+&image_font_Vivaldi_12_char_0x34,	// character: '4'
+&image_font_Vivaldi_12_char_0x35,	// character: '5'
+&image_font_Vivaldi_12_char_0x36,	// character: '6'
+&image_font_Vivaldi_12_char_0x37,	// character: '7'
+&image_font_Vivaldi_12_char_0x38,	// character: '8'
+&image_font_Vivaldi_12_char_0x39,	// character: '9'
+&image_font_Vivaldi_12_char_0x3a,	// character: ':'
+&image_font_Vivaldi_12_char_0x3b,	// character: ';'
+&image_font_Vivaldi_12_char_0x3c,	// character: '<'
+&image_font_Vivaldi_12_char_0x3d,	// character: '='
+&image_font_Vivaldi_12_char_0x3e,	// character: '>'
+&image_font_Vivaldi_12_char_0x3f,	// character: '?'
+&image_font_Vivaldi_12_char_0x40,	// character: '(a)'
+&image_font_Vivaldi_12_char_0x41,	// character: 'A'
+&image_font_Vivaldi_12_char_0x42,	// character: 'B'
+&image_font_Vivaldi_12_char_0x43,	// character: 'C'
+&image_font_Vivaldi_12_char_0x44,	// character: 'D'
+&image_font_Vivaldi_12_char_0x45,	// character: 'E'
+&image_font_Vivaldi_12_char_0x46,	// character: 'F'
+&image_font_Vivaldi_12_char_0x47,	// character: 'G'
+&image_font_Vivaldi_12_char_0x48,	// character: 'H'
+&image_font_Vivaldi_12_char_0x49,	// character: 'I'
+&image_font_Vivaldi_12_char_0x4a,	// character: 'J'
+&image_font_Vivaldi_12_char_0x4b,	// character: 'K'
+&image_font_Vivaldi_12_char_0x4c,	// character: 'L'
+&image_font_Vivaldi_12_char_0x4d,	// character: 'M'
+&image_font_Vivaldi_12_char_0x4e,	// character: 'N'
+&image_font_Vivaldi_12_char_0x4f,	// character: 'O'
+&image_font_Vivaldi_12_char_0x50,	// character: 'P'
+&image_font_Vivaldi_12_char_0x51,	// character: 'Q'
+&image_font_Vivaldi_12_char_0x52,	// character: 'R'
+&image_font_Vivaldi_12_char_0x53,	// character: 'S'
+&image_font_Vivaldi_12_char_0x54,	// character: 'T'
+&image_font_Vivaldi_12_char_0x55,	// character: 'U'
+&image_font_Vivaldi_12_char_0x56,	// character: 'V'
+&image_font_Vivaldi_12_char_0x57,	// character: 'W'
+&image_font_Vivaldi_12_char_0x58,	// character: 'X'
+&image_font_Vivaldi_12_char_0x59,	// character: 'Y'
+&image_font_Vivaldi_12_char_0x5a,	// character: 'Z'
+&image_font_Vivaldi_12_char_0x5b,	// character: '['
+&image_font_Vivaldi_12_char_0x5c,	// character: '\'
+&image_font_Vivaldi_12_char_0x5d,	// character: ']'
+&image_font_Vivaldi_12_char_0x5e,	// character: '^'
+&image_font_Vivaldi_12_char_0x5f,	// character: '_'
+&image_font_Vivaldi_12_char_0x60,	// character: '`'
+&image_font_Vivaldi_12_char_0x61,	// character: 'a'
+&image_font_Vivaldi_12_char_0x62,	// character: 'b'
+&image_font_Vivaldi_12_char_0x63,	// character: 'c'
+&image_font_Vivaldi_12_char_0x64,	// character: 'd'
+&image_font_Vivaldi_12_char_0x65,	// character: 'e'
+&image_font_Vivaldi_12_char_0x66,	// character: 'f'
+&image_font_Vivaldi_12_char_0x67,	// character: 'g'
+&image_font_Vivaldi_12_char_0x68,	// character: 'h'
+&image_font_Vivaldi_12_char_0x69,	// character: 'i'
+&image_font_Vivaldi_12_char_0x6a,	// character: 'j'
+&image_font_Vivaldi_12_char_0x6b,	// character: 'k'
+&image_font_Vivaldi_12_char_0x6c,	// character: 'l'
+&image_font_Vivaldi_12_char_0x6d,	// character: 'm'
+&image_font_Vivaldi_12_char_0x6e,	// character: 'n'
+&image_font_Vivaldi_12_char_0x6f,	// character: 'o'
+&image_font_Vivaldi_12_char_0x70,	// character: 'p'
+&image_font_Vivaldi_12_char_0x71,	// character: 'q'
+&image_font_Vivaldi_12_char_0x72,	// character: 'r'
+&image_font_Vivaldi_12_char_0x73,	// character: 's'
+&image_font_Vivaldi_12_char_0x74,	// character: 't'
+&image_font_Vivaldi_12_char_0x75,	// character: 'u'
+&image_font_Vivaldi_12_char_0x76,	// character: 'v'
+&image_font_Vivaldi_12_char_0x77,	// character: 'w'
+&image_font_Vivaldi_12_char_0x78,	// character: 'x'
+&image_font_Vivaldi_12_char_0x79,	// character: 'y'
+&image_font_Vivaldi_12_char_0x7a,	// character: 'z'
+&image_font_Vivaldi_12_char_0x7b,	// character: '{'
+&image_font_Vivaldi_12_char_0x7c,	// character: '|'
+&image_font_Vivaldi_12_char_0x7d,	// character: '}'
+&image_font_Vivaldi_12_char_0x7e	// character: '~'
+};
+//------------------------------------------------------------------------------------------------//
+//font declariation
+static const FONT font_Vivaldi_12 = {FONT_FORMAT_MONOCHROME, 95, reference_stream_font_Vivaldi_12, (IMAGE**) image_stream_font_Vivaldi_12};
