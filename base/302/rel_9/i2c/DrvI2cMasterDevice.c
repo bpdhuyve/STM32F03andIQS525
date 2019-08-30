@@ -312,6 +312,7 @@ BOOL DrvI2cMasterDevice_WriteData_specificSlaveRegister(I2C_DEVICE_ID device_id,
         if(DrvI2cMasterChannel_Config(i2c_dev_hndl->i2c_channel_hndl, &(i2c_dev_hndl->config_struct)) &&
            DrvI2cMasterChannel_WriteData_specificSlaveRegister(i2c_dev_hndl->i2c_channel_hndl, i2c_dev_hndl->address, data, count, (slave_reg_address<<8) | ( (slave_reg_address>>8) & 0x00FF)))
         {
+            free(data);
             if(wait_to_complete)
             {
 #if (I2C_DEVICE_USE_WAIT_TO_COMPLETE_TIMEOUT_TASK > 0)
@@ -338,7 +339,7 @@ BOOL DrvI2cMasterDevice_WriteData_specificSlaveRegister(I2C_DEVICE_ID device_id,
             }
             return TRUE;
         }
-        
+        free(data);
         i2c_dev_hndl->active = FALSE;
     }
     return FALSE;
