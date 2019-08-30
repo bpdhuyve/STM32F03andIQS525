@@ -210,13 +210,13 @@ U8 AppTouch_GetTouch2(U16* x, U16* y)
 {
   
   U8 testdata[4] = {0x06, 0x73, 0xAA, 0xBB};
-  U8 defaultReg[4] = {0x06, 0x75, 0x06, 0x73};
+  U8 defaultReg[4] = {0x66, 0x88, 0x099, 0x55};
     if (evenOrNot % 2 == 0)
       
     {
       if (evenOrNot == 0)
       {
-        DrvI2cMasterDevice_WriteData(i2c_device_id, defaultReg, 4, TRUE);
+        DrvI2cMasterDevice_WriteData_specificSlaveRegister(i2c_device_id, defaultReg, 4, TRUE,0x0673);
       }
       else
       {
@@ -225,8 +225,7 @@ U8 AppTouch_GetTouch2(U16* x, U16* y)
     }
     else if (evenOrNot > 1)
     {
-      DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, data_buffer, 2, TRUE, 0x7306);
-      //DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, data_buffer, 2, TRUE,; 0x0673);  
+      DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, data_buffer, 2, TRUE, 0x0673);
     }
     else
     {

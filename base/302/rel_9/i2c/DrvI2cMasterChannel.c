@@ -63,7 +63,6 @@
 //================================================================================================//
 
 
-
 //================================================================================================//
 // E X P O R T E D   V A R I A B L E S
 //------------------------------------------------------------------------------------------------//
@@ -106,13 +105,13 @@ BOOL DrvI2cMasterChannel_WriteData(I2C_CHANNEL_HNDL channel_hndl, U8 address, U8
     return FALSE;
 }
 //------------------------------------------------------------------------------------------------//
-BOOL DrvI2cMasterChannel_WriteData_specificSlaveRegister(I2C_CHANNEL_HNDL channel_hndl, U8 address, U8* read_data_ptr, U16 count, U16 slave_reg_address)
+BOOL DrvI2cMasterChannel_WriteData_specificSlaveRegister(I2C_CHANNEL_HNDL channel_hndl, U8 address, U8* write_data_ptr, U16 count, U16 slave_reg_address)
 {
     LOG_DEV("DrvI2cMasterChannel_ReadData");
-    
+  
     if((channel_hndl != NULL) && (channel_hndl->hook_list_ptr != NULL) && (channel_hndl->hook_list_ptr->read_hook != NULL))
     {
-        return channel_hndl->hook_list_ptr->write_hook_specificSlaveRegister(channel_hndl->channel_id, address, read_data_ptr, count, slave_reg_address);
+        return channel_hndl->hook_list_ptr->write_hook(channel_hndl->channel_id, address, write_data_ptr, count);
     }
     LOG_WRN("I2C read function is NULL");
 }

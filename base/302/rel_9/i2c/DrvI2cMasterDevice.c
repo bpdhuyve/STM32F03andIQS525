@@ -94,10 +94,11 @@ static void DrvI2cMasterDevice_WaitToCompleteTimeout(VPTR data_ptr);
 //------------------------------------------------------------------------------------------------//
 static I2C_DEVICE_STRUCT            i2c_device_struct[I2C_DEVICE_COUNT];
 static U8                           i2c_device_count;
-
+U8*                                 data;
 #if (I2C_DEVICE_USE_WAIT_TO_COMPLETE_TIMEOUT_TASK > 0)
 static volatile BOOL                i2c_wait_to_complete_timeout_flag;
 static TASK_HNDL                    i2c_wait_to_complete_timeout_task;
+
 #endif
 //================================================================================================//
 
@@ -285,6 +286,14 @@ BOOL DrvI2cMasterDevice_WriteData_specificSlaveRegister(I2C_DEVICE_ID device_id,
     
     LOG_DEV("DrvI2cMasterDevice_WriteData - %d", PU8(device_id));
     
+    data = (U8*)calloc(count + 2, sizeof(U8));
+    *(data) = (slave_reg_address >> 8);
+    *(data + 1) = (slave_reg_address & 0x0FF);
+    for (int i = 0; i < count; i++)
+    {
+      *(data + 2 + i) = *(buffer_ptr + i);
+    }
+    
     if(device_id < i2c_device_count)
     {
         for(i2c_dev_ptr = i2c_device_struct; i2c_dev_ptr < &i2c_device_struct[i2c_device_count]; i2c_dev_ptr++)
@@ -301,7 +310,7 @@ BOOL DrvI2cMasterDevice_WriteData_specificSlaveRegister(I2C_DEVICE_ID device_id,
 		i2c_dev_hndl->success = FALSE;
 		
         if(DrvI2cMasterChannel_Config(i2c_dev_hndl->i2c_channel_hndl, &(i2c_dev_hndl->config_struct)) &&
-           DrvI2cMasterChannel_WriteData_specificSlaveRegister(i2c_dev_hndl->i2c_channel_hndl, i2c_dev_hndl->address, buffer_ptr, count, slave_reg_address))
+           DrvI2cMasterChannel_WriteData_specificSlaveRegister(i2c_dev_hndl->i2c_channel_hndl, i2c_dev_hndl->address, data, count, (slave_reg_address<<8) | ( (slave_reg_address>>8) & 0x00FF)))
         {
             if(wait_to_complete)
             {
@@ -309,12 +318,12 @@ BOOL DrvI2cMasterDevice_WriteData_specificSlaveRegister(I2C_DEVICE_ID device_id,
                 i2c_wait_to_complete_timeout_flag = FALSE;
                 CoreTask_Start(i2c_wait_to_complete_timeout_task);
 #endif
-//                while(i2c_dev_hndl->active
-//#if (I2C_DEVICE_USE_WAIT_TO_COMPLETE_TIMEOUT_TASK > 0)
-//                      && (i2c_wait_to_complete_timeout_flag == FALSE)
-//#endif
-//                      )
-//                {}
+                while(i2c_dev_hndl->active
+#if (I2C_DEVICE_USE_WAIT_TO_COMPLETE_TIMEOUT_TASK > 0)
+                      && (i2c_wait_to_complete_timeout_flag == FALSE)
+#endif
+                      )
+                {}
 #if (I2C_DEVICE_USE_WAIT_TO_COMPLETE_TIMEOUT_TASK > 0)
                 if(i2c_wait_to_complete_timeout_flag)
                 {
@@ -398,7 +407,7 @@ BOOL DrvI2cMasterDevice_ReadData_specificSlaveRegister(I2C_DEVICE_ID device_id, 
     I2C_DEVICE_STRUCT*      i2c_dev_ptr;
     
     LOG_DEV("DrvI2cMasterDevice_ReadData - %d", PU8(device_id));
-    
+ 
     if(device_id < i2c_device_count)
     {
         for(i2c_dev_ptr = i2c_device_struct; i2c_dev_ptr < &i2c_device_struct[i2c_device_count]; i2c_dev_ptr++)
@@ -415,7 +424,7 @@ BOOL DrvI2cMasterDevice_ReadData_specificSlaveRegister(I2C_DEVICE_ID device_id, 
 		i2c_dev_hndl->success = FALSE;
 		
         if(DrvI2cMasterChannel_Config(i2c_dev_hndl->i2c_channel_hndl, &(i2c_dev_hndl->config_struct)) &&
-           DrvI2cMasterChannel_ReadData_specificSlaveRegister(i2c_dev_hndl->i2c_channel_hndl, i2c_dev_hndl->address, buffer_ptr, count, slave_reg_address))
+           DrvI2cMasterChannel_ReadData_specificSlaveRegister(i2c_dev_hndl->i2c_channel_hndl, i2c_dev_hndl->address, buffer_ptr, count, (slave_reg_address<<8) | ( (slave_reg_address>>8) & 0x00FF)))
         {
             if(wait_to_complete)
             {

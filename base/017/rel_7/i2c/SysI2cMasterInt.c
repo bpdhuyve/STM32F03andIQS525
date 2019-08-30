@@ -78,7 +78,7 @@ I2C_CTRL_STRUCT;
 
 typedef struct
 {
-  BOOL read_write_bit;
+  BOOL read_bit;
   I2C_CHANNEL channel;
   U8 address;
   U8* data_ptr;
@@ -106,8 +106,7 @@ static void SysI2cMasterIntI2cIsr(I2C_CHANNEL channel);
 static const I2C_TypeDef*           sysi2cmasterint_reg_ptr[I2C_CHANNEL_COUNT] = {(I2C_TypeDef*)I2C1_BASE, (I2C_TypeDef*)I2C2_BASE};
 static I2C_CTRL_STRUCT              sysi2cmasterint_ctrl_struct[SYSI2CMASTERINT_COUNT];
 static I2C_MSG_COMPLETE             sysi2cmasterint_msg_complete_hook;
-static read_write_struct            read_or_write;
-static U8                           timer = 300;
+static read_write_struct            read_struct;
 //================================================================================================//
 
 
@@ -133,6 +132,7 @@ static BOOL SysI2cMasterIntTransferData(I2C_CHANNEL channel, U8 address, U8* dat
     }
     
     ctrl_struct_ptr->data_ptr = data_ptr;
+
     reg_ptr->CR2 &= ~(I2C_CR2_SADD | I2C_CR2_RD_WRN | I2C_CR2_NBYTES);
     reg_ptr->CR2 |= (address << 1) & 0xFE;
     reg_ptr->CR2 |= (transfer_mode << 10);
@@ -150,8 +150,9 @@ static BOOL SysI2cMasterIntTransferData(I2C_CHANNEL channel, U8 address, U8* dat
     // enable interrupts
     reg_ptr->CR1 |= (I2C_CR1_TXIE | I2C_CR1_RXIE | I2C_CR1_TCIE | I2C_CR1_NACKIE);
     // start condition and slave address are sent automatically
+
     reg_ptr->CR2 |= I2C_CR2_START;
- 
+
     return TRUE;
 }
 //------------------------------------------------------------------------------------------------//
@@ -208,17 +209,17 @@ static void SysI2cMasterIntI2cIsr(I2C_CHANNEL channel)
             }
             if(status & I2C_ISR_TC)
             {
-                if (read_or_write.read_write_bit)
+                if (read_struct.read_bit)
                 {
-                  read_or_write.read_write_bit = FALSE;
+                  read_struct.read_bit = FALSE;
                   SysI2cMasterIntEndTransfer(channel, FALSE, TRUE);
-                  SysI2cMasterInt_Channel_ReadData(read_or_write.channel, read_or_write.address, read_or_write.data_ptr, read_or_write.count);
-                  
+                  SysI2cMasterInt_Channel_ReadData(read_struct.channel, read_struct.address, read_struct.data_ptr, read_struct.count);
                 }
                 else
                 {
                   SysI2cMasterIntEndTransfer(channel, TRUE, TRUE);
                 }
+                
             }
             if(status & I2C_ISR_NACKF)
             {
@@ -277,7 +278,7 @@ BOOL SysI2cMasterInt_Channel_Init(I2C_CHANNEL channel)
 {
     I2C_TypeDef*        reg_ptr;
     
-    read_or_write.read_write_bit = FALSE;
+    read_struct.read_bit = FALSE;
     
     if((U8)channel < SYSI2CMASTERINT_COUNT)
     {
@@ -420,12 +421,12 @@ BOOL SysI2cMasterInt_Channel_ReadData_specific_slave_reg(I2C_CHANNEL channel, U8
     {
         return FALSE;
     }
-    read_or_write.read_write_bit = TRUE;
-    read_or_write.channel = channel;
-    read_or_write.address = address;
-    read_or_write.data_ptr = data_ptr;
-    read_or_write.count = count;
-    read_or_write.slave_reg = slave_reg;
-    return SysI2cMasterIntTransferData(channel, address, (U8*)&read_or_write.slave_reg, (U16)(1<<1), WRITE);
+    read_struct.read_bit = TRUE;
+    read_struct.channel = channel;
+    read_struct.address = address;
+    read_struct.data_ptr = data_ptr;
+    read_struct.count = count;
+    read_struct.slave_reg = slave_reg;
+    return SysI2cMasterIntTransferData(read_struct.channel, read_struct.address, (U8*)&read_struct.slave_reg, (U16)(1<<1), WRITE);
 }
 //================================================================================================//
