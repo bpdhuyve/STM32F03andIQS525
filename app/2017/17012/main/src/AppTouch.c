@@ -99,13 +99,15 @@ static void AppTouch_settings(void)
     U8 stop[3] = {0xEE, 0xEE, 0xEE};
     
 
-    // Wake i2C and wait at least 150us
+    // Wake i2C and then wait at least 150us (if we don't wait 150us the device doesn't wake)
     DrvI2cMasterDevice_WriteData(i2c_device_id, data, 1, TRUE);
     while (timer>0)
     {
       timer--; // timer is 200 at start, takes around 170us to count to zero
     }
-    // Threshold settings data
+    
+    
+    // touchpad configuration
     data[0] = THRESHOLD_SETTINGS;
     data[1] = PROXTHRESHOLD_VAL;			// Prox Threshold
     data[2] = TOUCHMULTIPLIER_VAL;			// Touch Multiplier
@@ -133,7 +135,7 @@ void AppTouch_Init(I2C_CHANNEL_HNDL i2c_channel, U8 address)
     U8 data[2] = {0,0};
     i2c_device_id = DrvI2cMasterDevice_Register(i2c_channel, address, 100000);
     
-    AppTouch_settings();
+    AppTouch_settings();  // configure all parameters related to the touchpad
     
     MODULE_INIT_DONE();
 }
@@ -150,7 +152,7 @@ void AppTouch_Handler(void)
 U8 AppTouch_GetTouch(U16* x, U16* y)
 {
   
-    //just read data it will be xy data ...
+    //read data from the touchpad
     if(DrvI2cMasterDevice_ReadData(i2c_device_id, &data_buffer[0], 8, TRUE))
     {
         *x = ((data_buffer[2] << 8) + data_buffer[3]);
@@ -163,7 +165,7 @@ U8 AppTouch_GetTouch(U16* x, U16* y)
 }
 
 //================================================================================================//
-
+// @ brief : used to read out specific registers - only for testing purposes
 U8 AppTouch_GetData(U16* x, U16* y)
 {
   

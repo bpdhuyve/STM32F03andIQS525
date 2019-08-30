@@ -67,6 +67,8 @@ typedef enum
 }
 I2C_ACTION;
 //------------------------------------------------------------------------------------------------//
+
+// for saving info related to a single i2c transfer - used in interrupt and config functions
 typedef struct
 {
     BOOL                init_done;
@@ -215,7 +217,7 @@ static void SysI2cMasterIntI2cIsr(I2C_CHANNEL channel)
                 if (read_struct.read_bit)
                 {
                   read_struct.read_bit = FALSE;
-                  SysI2cMasterIntEndTransfer(channel, FALSE, TRUE); // False to  the 'i2c-stop' 
+                  SysI2cMasterIntEndTransfer(channel, FALSE, TRUE); // 'False' is to omit the 'i2c-stop' 
                   SysI2cMasterInt_Channel_ReadData(read_struct.channel, read_struct.address, read_struct.data_ptr, read_struct.count);
                 }
                 else
@@ -408,12 +410,16 @@ BOOL SysI2cMasterInt_Channel_ReadData_specific_slave_reg(I2C_CHANNEL channel, U8
     {
         return FALSE;
     }
+    // save this data to a struct because it is needed in the interrupt for completing the repeated start correctly
+    // We first do a 'i2c-write' below to specify the register we want to read from, and then we do a 'i2c-read' --> need the data underneath for that read
     read_struct.read_bit = TRUE;
     read_struct.channel = channel;
     read_struct.address = address;
     read_struct.data_ptr = data_ptr;
     read_struct.count = count;
     read_struct.slave_reg = slave_reg;
+    
+    // First write the address from which we want to read the data
     return SysI2cMasterIntTransferData(read_struct.channel, read_struct.address, (U8*)&read_struct.slave_reg, (U16)(1<<1), WRITE);
 }
 //================================================================================================//
