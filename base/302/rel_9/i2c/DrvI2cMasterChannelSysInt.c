@@ -61,7 +61,6 @@
 static BOOL DrvI2cMasterChannelSysInt_WriteData(I2C_CHANNEL_ID channel_id, U8 address, U8* data_ptr, U16 count);
 static BOOL DrvI2cMasterChannelSysInt_ReadData(I2C_CHANNEL_ID channel_id, U8 address, U8* data_ptr, U16 count);
 static BOOL DrvI2cMasterChannelSysInt_ReadData_specific_slave_reg(I2C_CHANNEL_ID channel_id, U8 address, U8* data_ptr, U16 count, U16 slave_reg);
-static BOOL DrvI2cMasterChannelSysInt_WriteData_specific_slave_reg(I2C_CHANNEL_ID channel_id, U8 address, U8* data_ptr, U16 count, U16 slave_reg);
 static BOOL DrvI2cMasterChannelSysInt_Config(I2C_CHANNEL_ID channel_id, I2C_CONFIG_STRUCT* config_struct_ptr);
 static void DrvI2cMasterChannelSysInt_MsgComplete(I2C_CHANNEL channel, BOOL success);
 //================================================================================================//
@@ -71,7 +70,7 @@ static void DrvI2cMasterChannelSysInt_MsgComplete(I2C_CHANNEL channel, BOOL succ
 //================================================================================================//
 // L O C A L   V A R I A B L E S
 //------------------------------------------------------------------------------------------------//
-static const I2C_CHANNEL_HOOK_LIST          i2c_channel_hook_list = {DrvI2cMasterChannelSysInt_WriteData, DrvI2cMasterChannelSysInt_ReadData, DrvI2cMasterChannelSysInt_ReadData_specific_slave_reg, DrvI2cMasterChannelSysInt_WriteData_specific_slave_reg, DrvI2cMasterChannelSysInt_Config};
+static const I2C_CHANNEL_HOOK_LIST          i2c_channel_hook_list = {DrvI2cMasterChannelSysInt_WriteData, DrvI2cMasterChannelSysInt_ReadData, DrvI2cMasterChannelSysInt_ReadData_specific_slave_reg, DrvI2cMasterChannelSysInt_Config};
 static I2C_CHANNEL_STRUCT                   i2c_channel_struct[DRVI2CMASTERCHANNELSYSINT_COUNT];
 static U8                                   i2c_channel_count;
 //================================================================================================//
@@ -92,11 +91,7 @@ static BOOL DrvI2cMasterChannelSysInt_WriteData(I2C_CHANNEL_ID channel_id, U8 ad
 {
     return SysI2cMasterInt_Channel_WriteData((I2C_CHANNEL)channel_id, address, data_ptr, count);
 }
-//------------------------------------------------------------------------------------------------//
-static BOOL DrvI2cMasterChannelSysInt_WriteData_specific_slave_reg(I2C_CHANNEL_ID channel_id, U8 address, U8* data_ptr, U16 count, U16 slave_reg)
-{
-    return SysI2cMasterInt_Channel_WriteData_specific_slave_reg((I2C_CHANNEL_ID)channel_id, address, data_ptr, count, slave_reg);
-}
+
 //------------------------------------------------------------------------------------------------//
 static BOOL DrvI2cMasterChannelSysInt_ReadData(I2C_CHANNEL_ID channel_id, U8 address, U8* data_ptr, U16 count)
 {

@@ -132,7 +132,8 @@ static BOOL SysI2cMasterIntTransferData(I2C_CHANNEL channel, U8 address, U8* dat
     }
     
     ctrl_struct_ptr->data_ptr = data_ptr;
-
+    
+    // setup control register 2 (CR2) for the data transfer
     reg_ptr->CR2 &= ~(I2C_CR2_SADD | I2C_CR2_RD_WRN | I2C_CR2_NBYTES);
     reg_ptr->CR2 |= (address << 1) & 0xFE;
     reg_ptr->CR2 |= (transfer_mode << 10);
@@ -147,10 +148,10 @@ static BOOL SysI2cMasterIntTransferData(I2C_CHANNEL channel, U8 address, U8* dat
     
     ctrl_struct_ptr->i2c_action = (I2C_ACTION)(transfer_mode + 1);
     
-    // enable interrupts
+    // enable interrupts (ref manual p580) --> will call interrupt handlers and take care of sending data and ending the transfer afterwards
     reg_ptr->CR1 |= (I2C_CR1_TXIE | I2C_CR1_RXIE | I2C_CR1_TCIE | I2C_CR1_NACKIE);
-    // start condition and slave address are sent automatically
-
+    
+    // sent start condition and slave address
     reg_ptr->CR2 |= I2C_CR2_START;
 
     return TRUE;
@@ -187,6 +188,7 @@ static __irq void SysI2cMasterIntI2c2Isr(void)
     SysI2cMasterIntI2cIsr(I2C_CHANNEL_2);
 }
 //------------------------------------------------------------------------------------------------//
+// @remark  interrupt handler
 static void SysI2cMasterIntI2cIsr(I2C_CHANNEL channel)
 {
     I2C_CTRL_STRUCT*    ctrl_struct_ptr = &sysi2cmasterint_ctrl_struct[channel];
@@ -209,10 +211,11 @@ static void SysI2cMasterIntI2cIsr(I2C_CHANNEL channel)
             }
             if(status & I2C_ISR_TC)
             {
+                // this part is necessary for the 'repeated start', because in this case we don't want a stop after the first start
                 if (read_struct.read_bit)
                 {
                   read_struct.read_bit = FALSE;
-                  SysI2cMasterIntEndTransfer(channel, FALSE, TRUE);
+                  SysI2cMasterIntEndTransfer(channel, FALSE, TRUE); // False to  the 'i2c-stop' 
                   SysI2cMasterInt_Channel_ReadData(read_struct.channel, read_struct.address, read_struct.data_ptr, read_struct.count);
                 }
                 else
@@ -390,22 +393,6 @@ BOOL SysI2cMasterInt_Channel_ReadData(I2C_CHANNEL channel, U8 address, U8* data_
         return FALSE;
     }
     return SysI2cMasterIntTransferData(channel, address, data_ptr, count, READ);
-}
-//================================================================================================//
-
-BOOL SysI2cMasterInt_Channel_WriteData_specific_slave_reg(I2C_CHANNEL channel,U8 address, U8* data_ptr, U16 count, U16 slave_reg)
-{
-    I2C_CTRL_STRUCT*            ctrl_struct_ptr = &sysi2cmasterint_ctrl_struct[channel];
-    
-    if((U8)channel >= SYSI2CMASTERINT_COUNT)
-    {
-        return FALSE;
-    }
-    if(ctrl_struct_ptr->init_done == FALSE)
-    {
-        return FALSE;
-    }
-    return SysI2cMasterIntTransferData(channel, address, data_ptr, count, WRITE);
 }
 
 //================================================================================================//

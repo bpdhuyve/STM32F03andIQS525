@@ -65,7 +65,6 @@ BOOL SysI2cMasterInt_Channel_ReadData(I2C_CHANNEL channel, U8 address, U8* data_
 
 BOOL SysI2cMasterInt_Channel_ReadData_specific_slave_reg(I2C_CHANNEL channel_id, U8 address, U8* data_ptr, U16 count, U16 slave_reg);
 
-BOOL SysI2cMasterInt_Channel_WriteData_specific_slave_reg(I2C_CHANNEL channel_id, U8 address, U8* data_ptr, U16 count, U16 slave_reg);
 //================================================================================================//
 
 

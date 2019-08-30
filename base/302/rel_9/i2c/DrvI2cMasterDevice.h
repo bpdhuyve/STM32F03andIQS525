@@ -48,10 +48,15 @@ typedef void (*DRVI2CDEVICE_MSG_COMPLETE)(BOOL success);
 //================================================================================================//
 // E X P O R T E D   F U N C T I O N   P R O T O T Y P E S
 //------------------------------------------------------------------------------------------------//
+
 void DrvI2cMasterDevice_Init(void);
+
 //------------------------------------------------------------------------------------------------//
+
 I2C_DEVICE_ID DrvI2cMasterDevice_Register(I2C_CHANNEL_HNDL i2c_channel_hndl, U8 address, U32 speed);
+
 //------------------------------------------------------------------------------------------------//
+
 BOOL DrvI2cMasterDevice_Config(I2C_DEVICE_ID device_id, I2C_CONFIG_STRUCT* config_struct_ptr);
 //------------------------------------------------------------------------------------------------//
 // @remark  Function that registers a message complete hook which can be called on the completion
@@ -74,6 +79,7 @@ BOOL DrvI2cMasterDevice_MsgComplete(I2C_DEVICE_ID device_id, DRVI2CDEVICE_MSG_CO
 //                            if TRUE, DrvI2cMasterDevice_WriteData will return TRUE if the transfer
 //                            was finished with success and in time (if the wait to complete timeout
 //                            task define is active), else it will return FALSE
+
 BOOL DrvI2cMasterDevice_WriteData(I2C_DEVICE_ID device_id, U8* buffer_ptr, U16 count, BOOL wait_to_complete);
 //------------------------------------------------------------------------------------------------//
 // @remark  Function that initiates a read operation to an I2C device.
@@ -90,8 +96,36 @@ BOOL DrvI2cMasterDevice_WriteData(I2C_DEVICE_ID device_id, U8* buffer_ptr, U16 c
 //                            task define is active), else it will return FALSE
 BOOL DrvI2cMasterDevice_ReadData(I2C_DEVICE_ID device_id, U8* buffer_ptr, U16 count, BOOL wait_to_complete);
 
+//------------------------------------------------------------------------------------------------//
+// @remark  Function that initiates a read operation to an I2C device, reading from a specific register on the slave
+// @param   device_id: the ID of the I2C device which was returned after registering the device with
+//                     DrvI2cMasterDevice_Register(channel, address, speed)
+// @param   buffer_ptr: pointer to the first U8 byte of a receive buffer
+// @param   count: the number of bytes to be received
+// @param   slave_reg_address: address of the register on the slave to read from
+// @param   wait_to_complete: if FALSE, DrvI2cMasterDevice_ReadData will return TRUE immediately
+//                            after initiating the transfer. A message complete call back hook
+//                            should be registered with DrvI2cMasterDevice_MsgComplete in order
+//                            to get feedback from the DrvI2cMasterDevice module.
+//                            if TRUE, DrvI2cMasterDevice_ReadData will return TRUE if the transfer
+//                            was finished with success and in time (if the wait to complete timeout
+//                            task define is active), else it will return FALSE
 BOOL DrvI2cMasterDevice_ReadData_specificSlaveRegister(I2C_DEVICE_ID device_id, U8* buffer_ptr, U16 count, BOOL wait_to_complete, U16 slave_reg_address);
 
+//------------------------------------------------------------------------------------------------//
+// @remark  Function that initiates a zrite operation to an I2C device, zriting to a specific register on the slave
+// @param   device_id: the ID of the I2C device which was returned after registering the device with
+//                     DrvI2cMasterDevice_Register(channel, address, speed)
+// @param   buffer_ptr: pointer to the first U8 byte of a receive buffer
+// @param   count: the number of bytes to be received
+// @param   slave_reg_address: address of the register on the slave to write to
+// @param   wait_to_complete: if FALSE, DrvI2cMasterDevice_ReadData will return TRUE immediately
+//                            after initiating the transfer. A message complete call back hook
+//                            should be registered with DrvI2cMasterDevice_MsgComplete in order
+//                            to get feedback from the DrvI2cMasterDevice module.
+//                            if TRUE, DrvI2cMasterDevice_ReadData will return TRUE if the transfer
+//                            was finished with success and in time (if the wait to complete timeout
+//                            task define is active), else it will return FALSE
 BOOL DrvI2cMasterDevice_WriteData_specificSlaveRegister(I2C_DEVICE_ID device_id, U8* buffer_ptr, U16 count, BOOL wait_to_complete, U16 slave_reg_address);
 //------------------------------------------------------------------------------------------------//
 

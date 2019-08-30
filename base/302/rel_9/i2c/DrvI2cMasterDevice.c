@@ -310,7 +310,7 @@ BOOL DrvI2cMasterDevice_WriteData_specificSlaveRegister(I2C_DEVICE_ID device_id,
 		i2c_dev_hndl->success = FALSE;
 		
         if(DrvI2cMasterChannel_Config(i2c_dev_hndl->i2c_channel_hndl, &(i2c_dev_hndl->config_struct)) &&
-           DrvI2cMasterChannel_WriteData_specificSlaveRegister(i2c_dev_hndl->i2c_channel_hndl, i2c_dev_hndl->address, data, count, (slave_reg_address<<8) | ( (slave_reg_address>>8) & 0x00FF)))
+           DrvI2cMasterChannel_WriteData(i2c_dev_hndl->i2c_channel_hndl, i2c_dev_hndl->address, data, count))
         {
             free(data);
             if(wait_to_complete)

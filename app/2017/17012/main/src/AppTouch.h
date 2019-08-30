@@ -53,7 +53,7 @@ void AppTouch_Handler(void);
 //------------------------------------------------------------------------------------------------//
 // @remark  returns number of touches 
 U8 AppTouch_GetTouch(U16* x, U16* y);
-U8 AppTouch_GetTouch2(U16* x, U16* y);
+U8 AppTouch_GetData(U16* x, U16* y);
 
 //================================================================================================//
 

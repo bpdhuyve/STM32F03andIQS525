@@ -43,7 +43,6 @@ typedef struct
     I2C_WRITE_HOOK                  write_hook;
     I2C_READ_HOOK                   read_hook;
     I2C_READ_HOOK_SLAVE_ADDR        read_hook_specificSlaveRegister;
-    I2C_WRITE_HOOK_SLAVE_ADDR       write_hook_specificSlaveRegister;
     I2C_CONFIG_HOOK                 config_hook;
     
 }
@@ -83,8 +82,6 @@ BOOL DrvI2cMasterChannel_WriteData(I2C_CHANNEL_HNDL channel_hndl, U8 address, U8
 BOOL DrvI2cMasterChannel_ReadData(I2C_CHANNEL_HNDL channel_hndl, U8 address, U8* read_data_ptr, U16 count);
 
 BOOL DrvI2cMasterChannel_ReadData_specificSlaveRegister(I2C_CHANNEL_HNDL channel_hndl, U8 address, U8* read_data_ptr, U16 count, U16 slave_reg_address);
-
-BOOL DrvI2cMasterChannel_WriteData_specificSlaveRegister(I2C_CHANNEL_HNDL channel_hndl, U8 address, U8* read_data_ptr, U16 count, U16 slave_reg_address);
 
 BOOL DrvI2cMasterChannel_Config(I2C_CHANNEL_HNDL channel_hndl, I2C_CONFIG_STRUCT* config_struct_ptr);
 

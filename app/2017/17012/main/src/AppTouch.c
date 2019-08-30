@@ -98,13 +98,7 @@ static void AppTouch_settings(void)
     U8 testdata[4] = {0x04, 0x035, 0xAB, 0x76};
     U8 stop[3] = {0xEE, 0xEE, 0xEE};
     
-    //DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, data_buffer, 2, TRUE, 0x0435);
-    //DrvI2cMasterDevice_WriteData(i2c_device_id, testdata, 4, TRUE);
-    //DrvI2cMasterDevice_WriteData_specificSlaveRegister(i2c_device_id, stop, 2, TRUE, 0x0433);
-    //DrvI2cMasterDevice_WriteData(i2c_device_id, testdata, 2, TRUE);
-    //DrvI2cMasterDevice_WriteData_specificSlaveRegister(i2c_device_id, stop, 1, TRUE, 0xEEEE);
-    
-    
+
     // Wake i2C and wait at least 150us
     DrvI2cMasterDevice_WriteData(i2c_device_id, data, 1, TRUE);
     while (timer>0)
@@ -112,10 +106,10 @@ static void AppTouch_settings(void)
       timer--; // timer is 200 at start, takes around 170us to count to zero
     }
     // Threshold settings data
-    data[0] = 0x22; //THRESHOLD_SETTINGS;
-    data[1] = 0x33; //PROXTHRESHOLD_VAL;			// Prox Threshold
-    data[2] = 0x44; // TOUCHMULTIPLIER_VAL;			// Touch Multiplier
-    data[3] = 0x55; //TOUCHSHIFTER_VAL;				// Touch Shifter
+    data[0] = THRESHOLD_SETTINGS;
+    data[1] = PROXTHRESHOLD_VAL;			// Prox Threshold
+    data[2] = TOUCHMULTIPLIER_VAL;			// Touch Multiplier
+    data[3] = TOUCHSHIFTER_VAL;				// Touch Shifter
     data[4] = PMPROXTHRESHOLD_VAL;			// PM Prox Threshold
     data[5] = (unsigned char)(SNAPTHRESHOLD_VAL>>8);	// Snap threshold
     data[6] = (unsigned char)SNAPTHRESHOLD_VAL;		// Snap threshold
@@ -123,34 +117,8 @@ static void AppTouch_settings(void)
     data[8] = TOUCHMULTIPLIER2_VAL;			// Non-trackpad channels Touch Multiplier
     data[9] = TOUCHSHIFTER2_VAL;		        // Non-trackpad channels Touch Shifter
        
-    DrvI2cMasterDevice_WriteData(i2c_device_id, data, 4, TRUE);
-        
-    
-    U8 data2[10];
-    // Threshold settings data
-    data2[0] = 0x04;
-    data2[1] = 0x35;			// Prox Threshold
-    data2[2] = 0x41;			// Touch Multiplier
-    data2[3] = 0x51;				// Touch Shifter
-    data2[4] = 0x61;			// PM Prox Threshold
-    data2[5] = (unsigned char)(SNAPTHRESHOLD_VAL>>8);	// Snap threshold
-    data2[6] = (unsigned char)SNAPTHRESHOLD_VAL;		// Snap threshold
-    data2[7] = PROXTHRESHOLD2_VAL;		        // Non-trackpad channels prox threshold
-    data2[8] = TOUCHMULTIPLIER2_VAL;			// Non-trackpad channels Touch Multiplier
-    data2[9] = 0x99;		        // Non-trackpad channels Touch Shifter
-    //DrvI2clMasterDevice_WriteData(i2c_device_id, &data2[0], 2, TRUE);
-  
-//    write to address 0x0433
-//      if(DrvI2cMasterDevice_WriteData(i2c_device_id, &data2[0], 4, TRUE))
-//      {
-//      MEMSET((VPTR)data_buffer, 0, SIZEOF(data_buffer));
-//      DrvI2cMasterDevice_ReadData(i2c_device_id, data_buffer, 10, TRUE);
-//      }
-//    
-//    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, data_buffer, 4, TRUE, 0x0435);
-//    DrvI2cMasterDevice_WriteData(i2c_device_id, &data[0], 4, TRUE);
-//    DrvI2cMasterDevice_WriteData(i2c_device_id, &data[0], 4, TRUE);
-}
+    DrvI2cMasterDevice_WriteData(i2c_device_id, data, 4, TRUE);     
+}    
 //================================================================================================//
 
 
@@ -158,41 +126,29 @@ static void AppTouch_settings(void)
 //================================================================================================//
 // E X P O R T E D   F U N C T I O N S
 //------------------------------------------------------------------------------------------------//
+    
 void AppTouch_Init(I2C_CHANNEL_HNDL i2c_channel, U8 address)
 {
     MODULE_INIT_ONCE();
     U8 data[2] = {0,0};
     i2c_device_id = DrvI2cMasterDevice_Register(i2c_channel, address, 100000);
     
-    //drvI2C nog aanpassen zodat read met repeated start altijd doet en niet stop start...
-    //if(DrvI2cMasterDevice_WriteData(i2c_device_id, data, 1, TRUE))
-    //{
-    //  MEMSET((VPTR)data_buffer, 0, SIZEOF(data_buffer));
-    //  DrvI2cMasterDevice_ReadData(i2c_device_id, data_buffer, 10, TRUE);
-    //}
-    //MEMSET((VPTR)data_buffer, 0, SIZEOF(data_buffer));
-    
     AppTouch_settings();
-    //DrvI2cMasterDevice_WriteData(i2c_device_id, stop, 1, TRUE);
-    //DrvI2cMasterDevice_WriteData(i2c_device_id, stop, 1, TRUE);
-    //DrvI2cMasterDevice_ReadData(i2c_device_id, data_buffer, 10, TRUE);
-
-    //DrvI2cMasterDevice_WriteData(i2c_device_id, (U8*)(0xE8 >> 1), 1, TRUE);
-    //DrvI2cMasterDevice_ReadData(i2c_device_id, data_buffer, 10, TRUE);
+    
     MODULE_INIT_DONE();
 }
+
 //------------------------------------------------------------------------------------------------//
+
 void AppTouch_Handler(void)
 {
     MODULE_CHECK();
 }
+
 //------------------------------------------------------------------------------------------------//
+
 U8 AppTouch_GetTouch(U16* x, U16* y)
 {
-  
-    //U8 testdata[2] = {0xAB, 0x76};
-    //DrvI2cMasterDevice_WriteData(i2c_device_id, testdata, 4, TRUE);
-    //DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, data_buffer, 2, TRUE, 0x0435);
   
     //just read data it will be xy data ...
     if(DrvI2cMasterDevice_ReadData(i2c_device_id, &data_buffer[0], 8, TRUE))
@@ -205,8 +161,10 @@ U8 AppTouch_GetTouch(U16* x, U16* y)
 
     return 0;
 }
+
 //================================================================================================//
-U8 AppTouch_GetTouch2(U16* x, U16* y)
+
+U8 AppTouch_GetData(U16* x, U16* y)
 {
   
   U8 testdata[4] = {0x06, 0x73, 0xAA, 0xBB};

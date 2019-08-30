@@ -145,7 +145,7 @@ static void AppLogic_ChangeMode(LOGIC_MODE mode)
     default:
     case LOGIC_MODE_ANIMATION:
         CoreTask_Start(task_hndl_AutoColorChanger_Ledstrip);
-//        CoreTask_SetPeriod(task_hndl_AutoColorChanger_Ledstrip, 50e3);
+        // CoreTask_SetPeriod(task_hndl_AutoColorChanger_Ledstrip, 50e3);
         break;
     }
 
@@ -162,7 +162,7 @@ static void AppLogic_ChangeMode(LOGIC_MODE mode)
         animation_offset = 0;
         color_var1.value = 0;
         auto_color_hsv_ledstrip.value = 0;
-//        CoreTask_SetPeriod(task_hndl_AutoColorChanger_Ledstrip, 1e3);
+        //        CoreTask_SetPeriod(task_hndl_AutoColorChanger_Ledstrip, 1e3);
         CoreTask_Stop(task_hndl_AutoColorChanger_Ledstrip);
         AppLedStrip_SetRgb(CoreConvert_HsvToRgb(auto_color_hsv_ledstrip));
         break;
@@ -175,7 +175,7 @@ static void Task_AutoColorChanger(VPTR data_ptr)
 {
     //if task task is active change the hue of the color FOR THE LEDRING
 
-    //in auto mode always 100% saturation and brighness, if lower (@startup) ramp up to that
+    // in auto mode always 100% saturation and brighness, if lower (@startup) ramp up to that
     if (auto_color_hsv.value < 50)
     {
         auto_color_hsv.value++;
@@ -238,11 +238,7 @@ static void Task_AutoColorChanger_Ledstrip(VPTR data_ptr)
     COLOR_RGB ledstrip_color;
 
     ledstrip_color = CoreConvert_HsvToRgb(auto_color_hsv_ledstrip);
-    //reduce brightness van leds
-//    ledstrip_color.red = ledstrip_color.red/10;
-//    ledstrip_color.green = ledstrip_color.green/10;
-//    ledstrip_color.blue = ledstrip_color.blue/10;
-
+    
     AppLedStrip_SetRgb(ledstrip_color);
 }
 //------------------------------------------------------------------------------------------------//
@@ -272,7 +268,7 @@ static void Task_GetTouchStatus(VPTR data_ptr)
         }
         touch_state = TOUCH_STATE_NONE;
     }
-    U8 touches2 = AppTouch_GetTouch2(&x, &y);
+    U8 touches2 = AppTouch_GetData(&x, &y);
     switch(logic_mode)
     {
     case LOGIC_MODE_INACTIVE:
