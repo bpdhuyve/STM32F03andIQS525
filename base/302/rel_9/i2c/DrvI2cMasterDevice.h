@@ -117,7 +117,7 @@ BOOL DrvI2cMasterDevice_ReadData_specificSlaveRegister(I2C_DEVICE_ID device_id, 
 // @param   device_id: the ID of the I2C device which was returned after registering the device with
 //                     DrvI2cMasterDevice_Register(channel, address, speed)
 // @param   buffer_ptr: pointer to the first U8 byte of a receive buffer
-// @param   count: the number of bytes to be received
+// @param   count: the number of bytes to be sent
 // @param   slave_reg_address: address of the register on the slave to write to
 // @param   wait_to_complete: if FALSE, DrvI2cMasterDevice_ReadData will return TRUE immediately
 //                            after initiating the transfer. A message complete call back hook

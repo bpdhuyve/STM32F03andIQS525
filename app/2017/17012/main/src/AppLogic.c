@@ -245,7 +245,7 @@ static void Task_AutoColorChanger_Ledstrip(VPTR data_ptr)
 static void Task_GetTouchStatus(VPTR data_ptr)
 {
     U16 x, y;
-    U8 touches = 0; //AppTouch_GetTouch(&x, &y);
+    U8 touches = AppTouch_GetTouch(&x, &y);
 
     if(touches > 0)
     {
@@ -268,7 +268,7 @@ static void Task_GetTouchStatus(VPTR data_ptr)
         }
         touch_state = TOUCH_STATE_NONE;
     }
-    U8 touches2 = AppTouch_GetData(&x, &y);
+    //U8 touches2 = AppTouch_GetData(&x, &y);
     switch(logic_mode)
     {
     case LOGIC_MODE_INACTIVE:
