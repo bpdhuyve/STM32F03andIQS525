@@ -397,8 +397,8 @@ void DrvI2cMasterChannelBitBang_Init(void)
     LOG_DEV("DrvI2cMasterChannelBitBang_Init");
     i2c_bb_channel_hook_list.write_hook = DrvI2cMasterChannelBitBang_WriteData;
     i2c_bb_channel_hook_list.read_hook = DrvI2cMasterChannelBitBang_ReadData;
-    i2c_bb_channel_hook_list.read_hook_specificSlaveRegister = DrvI2cMasterChannelBitBang_ReadData_specificSlaveRegister;
-    i2c_bb_channel_hook_list.read_hook_specificSlaveRegister = DrvI2cMasterChannelBitBang_WriteData_specificSlaveRegister;
+    //i2c_bb_channel_hook_list.read_hook_specificSlaveRegister = DrvI2cMasterChannelBitBang_ReadData_specificSlaveRegister;
+    //i2c_bb_channel_hook_list.read_hook_specificSlaveRegister = DrvI2cMasterChannelBitBang_WriteData_specificSlaveRegister;
     i2c_bb_channel_hook_list.config_hook = DrvI2cMasterChannelBitBang_Config;
     
     MEMSET((VPTR)i2c_bb_channel_struct, 0, SIZEOF(i2c_bb_channel_struct));

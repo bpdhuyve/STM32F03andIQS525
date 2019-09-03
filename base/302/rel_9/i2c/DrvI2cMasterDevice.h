@@ -129,6 +129,10 @@ BOOL DrvI2cMasterDevice_ReadData_specificSlaveRegister(I2C_DEVICE_ID device_id, 
 BOOL DrvI2cMasterDevice_WriteData_specificSlaveRegister(I2C_DEVICE_ID device_id, U8* buffer_ptr, U16 count, BOOL wait_to_complete, U16 slave_reg_address);
 //------------------------------------------------------------------------------------------------//
 
+
+BOOL DrvI2cMasterDevice_ReadData_repStart(I2C_DEVICE_ID device_id, U8* buffer_ptr, U16 count, BOOL wait_to_complete, U16 slave_reg_address);
+
+
 void DrvI2cMasterDevice_ChangeAddress(I2C_DEVICE_ID device_id, U8 address);
 //================================================================================================//
 

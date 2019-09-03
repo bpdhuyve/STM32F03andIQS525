@@ -78,7 +78,7 @@ BOOL SysI2cMasterInt_Channel_ReadData(I2C_CHANNEL channel, U8 address, U8* data_
 //                            if TRUE, DrvI2cMasterDevice_ReadData will return TRUE if the transfer
 //                            was finished with success and in time (if the wait to complete timeout
 //                            task define is active), else it will return FALSE
-BOOL SysI2cMasterInt_Channel_ReadData_specific_slave_reg(I2C_CHANNEL channel_id, U8 address, U8* data_ptr, U16 count, U16 slave_reg);
+BOOL SysI2cMasterInt_Channel_ReadData_specific_slave_reg(I2C_CHANNEL channel_id, U8 address, U8* data_ptr, U16 count, U16 slave_reg, U16 addr_len);
 
 //================================================================================================//
 

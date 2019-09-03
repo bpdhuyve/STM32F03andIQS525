@@ -95,9 +95,6 @@ static void AppTouch_settings(void)
 {
     //reset...
     U8 data[10];
-    U8 testdata[4] = {0x04, 0x035, 0xAB, 0x76};
-    U8 stop[3] = {0xEE, 0xEE, 0xEE};
-    
 
     // Wake i2C and then wait at least 150us (if we don't wait 150us the device doesn't wake)
     DrvI2cMasterDevice_WriteData(i2c_device_id, data, 1, TRUE);
@@ -107,8 +104,8 @@ static void AppTouch_settings(void)
     }
     
     
-    // touchpad configuration
-    data[0] = THRESHOLD_SETTINGS;
+    // touchpad threshold settings configuration
+    data[0] = THRESHOLD_SETTINGS;                       // = 0x11, address for writing threshold settings, p32 datasheet
     data[1] = PROXTHRESHOLD_VAL;			// Prox Threshold
     data[2] = TOUCHMULTIPLIER_VAL;			// Touch Multiplier
     data[3] = TOUCHSHIFTER_VAL;				// Touch Shifter
@@ -119,7 +116,7 @@ static void AppTouch_settings(void)
     data[8] = TOUCHMULTIPLIER2_VAL;			// Non-trackpad channels Touch Multiplier
     data[9] = TOUCHSHIFTER2_VAL;		        // Non-trackpad channels Touch Shifter
        
-    DrvI2cMasterDevice_WriteData(i2c_device_id, data, 4, TRUE);     
+    DrvI2cMasterDevice_WriteData(i2c_device_id, &data[0], 10, TRUE);     
 }    
 //================================================================================================//
 
@@ -152,8 +149,8 @@ void AppTouch_Handler(void)
 U8 AppTouch_GetTouch(U16* x, U16* y)
 {
   
-    //read data from the touchpad
-    if(DrvI2cMasterDevice_ReadData(i2c_device_id, &data_buffer[0], 8, TRUE));//, 0x0010))
+    //read  x,y data from the touchpad
+    if(DrvI2cMasterDevice_ReadData(i2c_device_id, &data_buffer[0], 8, TRUE))
     {
         *x = ((data_buffer[2] << 8) + data_buffer[3]);
         *y = ((data_buffer[4] << 8) + data_buffer[5]); 
@@ -177,16 +174,17 @@ U8 AppTouch_GetData(U16* x, U16* y)
     {
       if (evenOrNot == 0)
       {
-        DrvI2cMasterDevice_WriteData_specificSlaveRegister(i2c_device_id, defaultReg, 2, TRUE,0x0673); // write 2 bytes to 0x0673
+        //DrvI2cMasterDevice_WriteData_specificSlaveRegister(i2c_device_id, defaultReg, 2, TRUE,0x0673); // write 2 bytes to 0x0673
       }
       else
       {
-        DrvI2cMasterDevice_WriteData_specificSlaveRegister(i2c_device_id, testdata, 3, TRUE,0x0673);  // read 3 bytes from 0x0673
+        //DrvI2cMasterDevice_WriteData_specificSlaveRegister(i2c_device_id, testdata, 3, TRUE,0x0673);  // read 3 bytes from 0x0673
       }
     }
     else if (evenOrNot > 1)
     {
-      DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, data_buffer, 2, TRUE, 0x0673);
+      DrvI2cMasterDevice_ReadData_repStart(i2c_device_id, data_buffer, 8, TRUE, 0x01);   
+      //DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, data_buffer, 6, TRUE, 0x0000);
     }
     else
     {

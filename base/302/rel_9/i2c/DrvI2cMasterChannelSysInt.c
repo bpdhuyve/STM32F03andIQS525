@@ -60,7 +60,7 @@
 //------------------------------------------------------------------------------------------------//
 static BOOL DrvI2cMasterChannelSysInt_WriteData(I2C_CHANNEL_ID channel_id, U8 address, U8* data_ptr, U16 count);
 static BOOL DrvI2cMasterChannelSysInt_ReadData(I2C_CHANNEL_ID channel_id, U8 address, U8* data_ptr, U16 count);
-static BOOL DrvI2cMasterChannelSysInt_ReadData_specific_slave_reg(I2C_CHANNEL_ID channel_id, U8 address, U8* data_ptr, U16 count, U16 slave_reg);
+static BOOL DrvI2cMasterChannelSysInt_ReadData_specific_slave_reg(I2C_CHANNEL_ID channel_id, U8 address, U8* data_ptr, U16 count, U16 slave_reg, U16 addr_len);
 static BOOL DrvI2cMasterChannelSysInt_Config(I2C_CHANNEL_ID channel_id, I2C_CONFIG_STRUCT* config_struct_ptr);
 static void DrvI2cMasterChannelSysInt_MsgComplete(I2C_CHANNEL channel, BOOL success);
 //================================================================================================//
@@ -98,9 +98,9 @@ static BOOL DrvI2cMasterChannelSysInt_ReadData(I2C_CHANNEL_ID channel_id, U8 add
     return SysI2cMasterInt_Channel_ReadData((I2C_CHANNEL)channel_id, address, data_ptr, count);
 }
 //------------------------------------------------------------------------------------------------//
-static BOOL DrvI2cMasterChannelSysInt_ReadData_specific_slave_reg(I2C_CHANNEL_ID channel_id, U8 address, U8* data_ptr, U16 count, U16 slave_reg)
+static BOOL DrvI2cMasterChannelSysInt_ReadData_specific_slave_reg(I2C_CHANNEL_ID channel_id, U8 address, U8* data_ptr, U16 count, U16 slave_reg, U16 addr_len)
 {
-    return SysI2cMasterInt_Channel_ReadData_specific_slave_reg((I2C_CHANNEL_ID)channel_id, address, data_ptr, count, slave_reg);
+    return SysI2cMasterInt_Channel_ReadData_specific_slave_reg((I2C_CHANNEL_ID)channel_id, address, data_ptr, count, slave_reg, addr_len);
 }
 //------------------------------------------------------------------------------------------------//
 static BOOL DrvI2cMasterChannelSysInt_Config(I2C_CHANNEL_ID channel_id, I2C_CONFIG_STRUCT* config_struct_ptr)

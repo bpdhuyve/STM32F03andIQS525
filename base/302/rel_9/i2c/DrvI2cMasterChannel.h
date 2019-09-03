@@ -34,7 +34,7 @@ typedef U8                  I2C_CHANNEL_ID;
 
 typedef BOOL (*I2C_WRITE_HOOK)(I2C_CHANNEL_ID channel_id, U8 address, U8* data_ptr, U16 count);
 typedef BOOL (*I2C_READ_HOOK)(I2C_CHANNEL_ID channel_id, U8 address, U8* data_ptr, U16 count);
-typedef BOOL (*I2C_READ_HOOK_SLAVE_ADDR)(I2C_CHANNEL_ID channel_id, U8 address, U8* data_ptr, U16 count, U16 slave_reg_address);
+typedef BOOL (*I2C_READ_HOOK_SLAVE_ADDR)(I2C_CHANNEL_ID channel_id, U8 address, U8* data_ptr, U16 count, U16 slave_reg_address, U16 addr_len);
 typedef BOOL (*I2C_WRITE_HOOK_SLAVE_ADDR)(I2C_CHANNEL_ID channel_id, U8 address, U8* data_ptr, U16 count, U16 slave_reg_address);
 typedef BOOL (*I2C_CONFIG_HOOK)(I2C_CHANNEL_ID channel_id, I2C_CONFIG_STRUCT* config_struct_ptr);
 
@@ -81,7 +81,7 @@ BOOL DrvI2cMasterChannel_WriteData(I2C_CHANNEL_HNDL channel_hndl, U8 address, U8
 
 BOOL DrvI2cMasterChannel_ReadData(I2C_CHANNEL_HNDL channel_hndl, U8 address, U8* read_data_ptr, U16 count);
 
-BOOL DrvI2cMasterChannel_ReadData_specificSlaveRegister(I2C_CHANNEL_HNDL channel_hndl, U8 address, U8* read_data_ptr, U16 count, U16 slave_reg_address);
+BOOL DrvI2cMasterChannel_ReadData_specificSlaveRegister(I2C_CHANNEL_HNDL channel_hndl, U8 address, U8* read_data_ptr, U16 count, U16 slave_reg_address, U16 addr_len);
 
 BOOL DrvI2cMasterChannel_Config(I2C_CHANNEL_HNDL channel_hndl, I2C_CONFIG_STRUCT* config_struct_ptr);
 

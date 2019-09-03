@@ -425,7 +425,66 @@ BOOL DrvI2cMasterDevice_ReadData_specificSlaveRegister(I2C_DEVICE_ID device_id, 
 		i2c_dev_hndl->success = FALSE;
 		
         if(DrvI2cMasterChannel_Config(i2c_dev_hndl->i2c_channel_hndl, &(i2c_dev_hndl->config_struct)) &&
-           DrvI2cMasterChannel_ReadData_specificSlaveRegister(i2c_dev_hndl->i2c_channel_hndl, i2c_dev_hndl->address, buffer_ptr, count, (slave_reg_address<<8) | ( (slave_reg_address>>8) & 0x00FF)))
+           DrvI2cMasterChannel_ReadData_specificSlaveRegister(i2c_dev_hndl->i2c_channel_hndl, i2c_dev_hndl->address, buffer_ptr, count, (slave_reg_address<<8) | ( (slave_reg_address>>8) & 0x00FF), (1<<1)))
+        {
+            if(wait_to_complete)
+            {
+#if (I2C_DEVICE_USE_WAIT_TO_COMPLETE_TIMEOUT_TASK > 0)
+                i2c_wait_to_complete_timeout_flag = FALSE;
+                CoreTask_Start(i2c_wait_to_complete_timeout_task);
+#endif
+                while(i2c_dev_hndl->active
+#if (I2C_DEVICE_USE_WAIT_TO_COMPLETE_TIMEOUT_TASK > 0)
+                      && (i2c_wait_to_complete_timeout_flag == FALSE)
+#endif
+                    )
+                {}
+#if (I2C_DEVICE_USE_WAIT_TO_COMPLETE_TIMEOUT_TASK > 0)
+                if(i2c_wait_to_complete_timeout_flag)
+                {
+                    LOG_WRN("I2C device timed out - %d", PU8(device_id));
+                    i2c_dev_hndl->active = FALSE;
+                    return FALSE;
+                }
+                CoreTask_Stop(i2c_wait_to_complete_timeout_task);
+#endif
+                
+                return i2c_dev_hndl->success;
+            }
+            return TRUE;
+        }
+        
+        i2c_dev_hndl->active = FALSE;
+    }
+    return FALSE;
+}
+
+//------------------------------------------------------------------------------------------------//
+// @brief: for sending data to a specific register on the slave, 1 byte addressing
+BOOL DrvI2cMasterDevice_ReadData_repStart(I2C_DEVICE_ID device_id, U8* buffer_ptr, U16 count, BOOL wait_to_complete, U16 slave_reg_address)
+{
+    I2C_DEVICE_STRUCT*      i2c_dev_hndl = &i2c_device_struct[device_id];
+    I2C_DEVICE_STRUCT*      i2c_dev_ptr;
+    
+    LOG_DEV("DrvI2cMasterDevice_ReadData - %d", PU8(device_id));
+ 
+    if(device_id < i2c_device_count)
+    {
+        for(i2c_dev_ptr = i2c_device_struct; i2c_dev_ptr < &i2c_device_struct[i2c_device_count]; i2c_dev_ptr++)
+        {
+            if((i2c_dev_ptr->i2c_channel_hndl == i2c_dev_hndl->i2c_channel_hndl) &&
+               (i2c_dev_ptr->active == TRUE))
+            {
+                LOG_WRN("I2C channel is busy (R) - %d", PU8(device_id));
+                return FALSE;
+            }
+        }
+        
+        i2c_dev_hndl->active = TRUE;
+		i2c_dev_hndl->success = FALSE;
+		
+        if(DrvI2cMasterChannel_Config(i2c_dev_hndl->i2c_channel_hndl, &(i2c_dev_hndl->config_struct)) &&
+           DrvI2cMasterChannel_ReadData_specificSlaveRegister(i2c_dev_hndl->i2c_channel_hndl, i2c_dev_hndl->address, buffer_ptr, count, slave_reg_address, 1))
         {
             if(wait_to_complete)
             {

@@ -398,7 +398,7 @@ BOOL SysI2cMasterInt_Channel_ReadData(I2C_CHANNEL channel, U8 address, U8* data_
 }
 
 //================================================================================================//
-BOOL SysI2cMasterInt_Channel_ReadData_specific_slave_reg(I2C_CHANNEL channel, U8 address, U8* data_ptr, U16 count, U16 slave_reg)
+BOOL SysI2cMasterInt_Channel_ReadData_specific_slave_reg(I2C_CHANNEL channel, U8 address, U8* data_ptr, U16 count, U16 slave_reg, U16 addr_len)
 {
     I2C_CTRL_STRUCT*            ctrl_struct_ptr = &sysi2cmasterint_ctrl_struct[channel];
     
@@ -418,8 +418,13 @@ BOOL SysI2cMasterInt_Channel_ReadData_specific_slave_reg(I2C_CHANNEL channel, U8
     read_struct.data_ptr = data_ptr;
     read_struct.count = count;
     read_struct.slave_reg = slave_reg;
+    if (addr_len == 1)
+    {
+      read_struct.slave_reg = slave_reg;
+    }
     
     // First write the address from which we want to read the data
-    return SysI2cMasterIntTransferData(read_struct.channel, read_struct.address, (U8*)&read_struct.slave_reg, (U16)(1<<1), WRITE);
+    return SysI2cMasterIntTransferData(read_struct.channel, read_struct.address, (U8*)&read_struct.slave_reg, addr_len, WRITE);
 }
 //================================================================================================//
+
