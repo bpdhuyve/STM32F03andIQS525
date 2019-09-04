@@ -96,12 +96,6 @@ static void AppTouch_settings(void)
     //reset...
     U8 data[10];
 
-    // Wake i2C and then wait at least 150us (if we don't wait 150us the device doesn't wake)
-    DrvI2cMasterDevice_WriteData(i2c_device_id, data, 1, TRUE);
-    while (timer>0)
-    {
-      timer--; // timer is 200 at start, takes around 170us to count to zero
-    }
     
     
     // touchpad threshold settings configuration
@@ -109,14 +103,21 @@ static void AppTouch_settings(void)
     data[1] = PROXTHRESHOLD_VAL;			// Prox Threshold
     data[2] = TOUCHMULTIPLIER_VAL;			// Touch Multiplier
     data[3] = TOUCHSHIFTER_VAL;				// Touch Shifter
-    data[4] = PMPROXTHRESHOLD_VAL;			// PM Prox Threshold
+    data[4] =  PMPROXTHRESHOLD_VAL;			// PM Prox Threshold
     data[5] = (unsigned char)(SNAPTHRESHOLD_VAL>>8);	// Snap threshold
     data[6] = (unsigned char)SNAPTHRESHOLD_VAL;		// Snap threshold
     data[7] = PROXTHRESHOLD2_VAL;		        // Non-trackpad channels prox threshold
     data[8] = TOUCHMULTIPLIER2_VAL;			// Non-trackpad channels Touch Multiplier
     data[9] = TOUCHSHIFTER2_VAL;		        // Non-trackpad channels Touch Shifter
-       
-    DrvI2cMasterDevice_WriteData(i2c_device_id, &data[0], 10, TRUE);     
+    
+    // Wake i2C and then wait at least 150us (if we don't wait 150us the device doesn't wake)
+    DrvI2cMasterDevice_WriteData(i2c_device_id, data, 2, TRUE);
+    while (timer>0)
+    {
+      timer--; // timer is 200 at start, takes around 170us to count to zero
+    }
+    
+    DrvI2cMasterDevice_WriteData(i2c_device_id, data, 10, TRUE);     
 }    
 //================================================================================================//
 
@@ -150,7 +151,7 @@ U8 AppTouch_GetTouch(U16* x, U16* y)
 {
   
     //read  x,y data from the touchpad
-    if(DrvI2cMasterDevice_ReadData(i2c_device_id, &data_buffer[0], 8, TRUE))
+    if(DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, data_buffer, 4, TRUE, 0x0014) )//DrvI2cMasterDevice_ReadData(i2c_device_id, &data_buffer[0], 8, TRUE))
     {
         *x = ((data_buffer[2] << 8) + data_buffer[3]);
         *y = ((data_buffer[4] << 8) + data_buffer[5]); 
@@ -183,7 +184,7 @@ U8 AppTouch_GetData(U16* x, U16* y)
     }
     else if (evenOrNot > 1)
     {
-      DrvI2cMasterDevice_ReadData_repStart(i2c_device_id, data_buffer, 8, TRUE, 0x01);   
+      //DrvI2cMasterDevice_ReadData_repStart(i2c_device_id, data_buffer, 8, TRUE, 0x01);   
       //DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, data_buffer, 6, TRUE, 0x0000);
     }
     else

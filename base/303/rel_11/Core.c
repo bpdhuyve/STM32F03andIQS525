@@ -481,7 +481,7 @@ static void TermTask( void *pvParameters )
 // E X P O R T E D   F U N C T I O N S
 //------------------------------------------------------------------------------------------------//
 // @remark  none
-int main(void)
+  int main(void)
 {
 #ifdef USE_FREERTOS
     xTaskHandle task = NULL;

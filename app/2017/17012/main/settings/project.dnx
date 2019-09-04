@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <settings>
     <DebugChecksum>
-        <Checksum>4110392418</Checksum>
+        <Checksum>1474442317</Checksum>
     </DebugChecksum>
     <Stack>
         <FillEnabled>0</FillEnabled>
@@ -161,8 +161,7 @@
         <Bp2>_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\base\303\rel_11\CoreLog.c}.774.9" 0 0 1 "" 0 "" 0</Bp2>
         <Bp3>_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\base\302\rel_9\i2c\DrvI2cMasterChannelBitBang.c}.349.3" 0 0 1 "" 0 "" 0</Bp3>
         <Bp4>_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\base\302\rel_9\i2c\DrvI2cMasterChannelBitBang.c}.329.3" 0 0 1 "" 0 "" 0</Bp4>
-        <Bp5>_ 1 "EMUL_CODE" "{$PROJ_DIR$\src\AppTouch.c}.100.5" 0 0 1 "" 0 "" 0</Bp5>
-        <Count>6</Count>
+        <Count>5</Count>
     </Breakpoints2>
     <LogFile>
         <LoggingEnabled>_ 0</LoggingEnabled>
