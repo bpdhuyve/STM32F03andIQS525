@@ -151,7 +151,7 @@ void AppMain_Init(void)
 //    i2c_channel = DrvI2cMasterChannelSysInt_Register(I2C_CHANNEL_2);
     i2c_channel = DrvI2cMasterChannelSysInt_Register(I2C_CHANNEL_1);
     AppTouch_Init(i2c_channel, (0xE8 >> 1));   // default device address is 0xE8
- //   AppTouch_Init(i2c_channel, (0x68 ));
+ // AppTouch_Init(i2c_channel, (0x68 ));
 
 
 

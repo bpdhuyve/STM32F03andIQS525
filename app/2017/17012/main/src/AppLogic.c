@@ -245,7 +245,7 @@ static void Task_AutoColorChanger_Ledstrip(VPTR data_ptr)
 static void Task_GetTouchStatus(VPTR data_ptr)
 {
     U16 x, y;
-    U8 touches = AppTouch_GetTouch(&x, &y);
+    U8 touches =  AppTouch_GetTouch(&x, &y);
 
     if(touches > 0)
     {

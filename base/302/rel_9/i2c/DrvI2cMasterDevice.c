@@ -288,7 +288,7 @@ BOOL DrvI2cMasterDevice_WriteData_specificSlaveRegister(I2C_DEVICE_ID device_id,
     
     data = (U8*)calloc(count + 2, sizeof(U8));
     *(data) = (slave_reg_address >> 8);
-    *(data + 1) = (slave_reg_address & 0x0FF);
+    *(data + 1) = (slave_reg_address & 0x00FF);
     for (int i = 0; i < count; i++)
     {
       *(data + 2 + i) = *(buffer_ptr + i);
