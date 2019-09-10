@@ -94,51 +94,6 @@ static U8               timer = 50;
 static void AppTouch_settings(void)
 {
     //reset...
-    U8 data[10];
-    U8 config[4] = {0x05,0x8E,0x4D,0xE4};
-    
-    U8 separator[4] = {0xEE,0xEE,0x00,0x01};
-    U8 config[4] = {0x05,0x8E,0x6C,0x24};
-    
-    //----
-    
-    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 6, FALSE, 0x0000);
-    DrvI2cMasterDevice_WriteData(i2c_device_id, separator, 4, FALSE);
-    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 100, FALSE, 0x0431);
-    DrvI2cMasterDevice_WriteData(i2c_device_id, separator, 4, FALSE);
-    
-    //----
-    
-    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 46, TRUE, 0x000B);
-    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 20, TRUE, 0x0039);
-    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 30, TRUE, 0x0059);
-    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 30, TRUE, 0x0077);
-    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 100, TRUE, 0x0095);
-    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 1, TRUE, 0xEEEE);
-      
-    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 46, TRUE, 0x000B);
-    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 20, TRUE, 0x0039);
-    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 30, TRUE, 0x0059);
-    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 30, TRUE, 0x0077);
-    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 100, TRUE, 0x0095);
-    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 1, TRUE, 0xEEEE);
-      
-    //----
-    
-    DrvI2cMasterDevice_WriteData(i2c_device_id, config, 4, TRUE);   // write system config 0 and 1
-    
-    //----
-    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 46, TRUE, 0x000B);
-    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 20, TRUE, 0x0039);
-    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 30, TRUE, 0x0059);
-    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 30, TRUE, 0x0077);
-    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 100, TRUE, 0x0095);
-    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 1, TRUE, 0xEEEE);
-    
-    DrvI2cMasterDevice_WriteData_specificSlaveRegister(i2c_device_id, &data[0], 2, TRUE, 0x0433);
-    DrvI2cMasterDevice_WriteData(i2c_device_id, config, 4, TRUE);   // write system config 0 and 1
-    
-    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, data_buffer, 6, TRUE, 0x0039);
 }    
 //================================================================================================//
 
