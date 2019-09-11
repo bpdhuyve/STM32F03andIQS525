@@ -76,7 +76,7 @@ MODULE_DECLARE();
 static I2C_DEVICE_ID	i2c_device_id;
 static U8	        data_buffer[60];
 static U8               evenOrNot = 0;
-static U8               timer = 50;
+static U8               timer = 200;
 //================================================================================================//
 
 
@@ -91,95 +91,103 @@ static U8               timer = 50;
 //================================================================================================//
 // L O C A L   F U N C T I O N S
 //------------------------------------------------------------------------------------------------//
+
+// @brief: Configuration of parameters on the IQS525
+// refer to datasheet of IQS525 B000 for explanation of every register, pages are mentioned below
 static void AppTouch_settings(void)
 {
-    //reset...
-    U8 data[10];
-    U8 separator[4] = {0xEE,0xEE,0x00,0x01};
-    U8 config[4] = {0x05,0x8E,0x6C,0x24};
+  
+    // Used to end communication window
+    U8 end_communication_window[4] = {0xEE,0xEE,0x00,0x01};  
+     
+    // Register 0x0431 = SystemControl0 ; 0x0432 = SystemControl1 ; p. 40 datasheet
+    U8 system_control_0and1[4] = {0x04,0x31,0xB8,0x00};  // bit 5 of high byte is 'auto ATI bit' --> important that it is set so that auto ATI is performed at start - the bit is automatically cleared afterwards         
     
-    //----
+    // Register 0x058E = SystemConfig0 ; 0x058F = SystemConfig1 ; p. 42 datasheet
+    U8 system_config_0and1[4] = {0x05, 0x8E, 0x6C, 0x24};
     
-    //DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 6, FALSE, 0x0000);
-    //DrvI2cMasterDevice_WriteData(i2c_device_id, separator, 4, FALSE);
-    //DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 100, FALSE, 0x0431);
-    //DrvI2cMasterDevice_WriteData(i2c_device_id, separator, 4, FALSE);
+    // thresholds for touch, snap and proximity, starting at register 0x0592
+    U8 thresholds[8];
+    thresholds[0] = 0x05;  // address high byte
+    thresholds[1] = 0x92;  // address low byte
+    thresholds[2] = 0x17;  // Snap threshold high byte  -- not used in this implementation so value doesn't really matter
+    thresholds[3] = 0x08;  // Snap threshold low byte   -- not used in this implementation so value doesn't really matter
+    thresholds[4] = 0x12;  // Prox threshold - trackpad
+    thresholds[5] = 0x0C;  // Prox threshold - ALP channel
+    thresholds[6] = 0x00;  // Global touch multiplier - set
+    thresholds[7] = 0x00;  // Global touch multiplier - clear
     
-    //----
-//    
-//    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 46, TRUE, 0x000B);
-//    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 20, TRUE, 0x0039);
-//    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 30, TRUE, 0x0059);
-//    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 30, TRUE, 0x0077);
-//    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 100, TRUE, 0x0095);
-//    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 1, TRUE, 0xEEEE);
-//      
-//    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 46, TRUE, 0x000B);
-//    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 20, TRUE, 0x0039);
-//    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 30, TRUE, 0x0059);
-//    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 30, TRUE, 0x0077);
-//    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 100, TRUE, 0x0095);
-//    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 1, TRUE, 0xEEEE);
-//      
-    //----
+    U8 indiviual_multiplier_adjustments[150];  // Individual touch multiplier adjustments, for finetuning every channel separately - TODO if necessary
     
-    //DrvI2cMasterDevice_WriteData(i2c_device_id, config, 4, TRUE);   // write system config 0 and 1
+    // ATI = auto tuning, to balance out small variations between trackpad hardware and IQS525, to give similar performance accross devices
+    // ATI targets = target values for the ATI tuning, the ATI compensation values will automatically be chosen such that each count value is close to the ATI target value
+    U8 ATI_settings[13];
+    ATI_settings[0] = 0x05;  // address high byte 
+    ATI_settings[1] = 0x6D;  // address low byte
+    ATI_settings[2] = 0x01;  // ATI target value (for normal mode) high byte
+    ATI_settings[3] = 0xF4;  // ATI target value (for normal mode) low byte
+    ATI_settings[4] = 0x01;  // ATI target value (for ALP channel) high byte
+    ATI_settings[5] = 0xF4;  // ATI target value (for ALP channel) high byte
+    ATI_settings[6] = 0x4B;  // Reference drift limit - p.17 datasheet - condition for Re-ATI to activate
+    ATI_settings[7] = 0x32;  // ALP LTA drift limit - p.17  datasheet - condition for Re-ATI to activate
+    ATI_settings[6] = 0x00;  // Re-ATI lower compensation limit - used to check if an ATI error hasn't occured - p. 18 datasheet
+    ATI_settings[9] = 0xFF;  // Re-ATI upper compensation limit - used to check if an ATI error hasn't occured - p. 18 datasheet
+    ATI_settings[10] = 0x07; // Max count limit high byte - reATI is triggered if max count limit is exceeded for 15 consevutive cycles --> indicates something is wrong - p.18 datasheet
+    ATI_settings[11] = 0xD0; // Max count limit low byte - reATI is triggered if max count limit is exceeded for 15 consevutive cycles --> indicates something is wrong - p.18 datasheet
+    ATI_settings[12] = 0x05; // reATI retry time - to prevent reAti repeating indefinetely in certain circumstances
     
-//    //----
-//    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 46, TRUE, 0x000B);
-//    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 20, TRUE, 0x0039);
-//    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 30, TRUE, 0x0059);
-//    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 30, TRUE, 0x0077);
-//    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 100, TRUE, 0x0095);
-//    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, big_buffer, 1, TRUE, 0xEEEE);
+    // Report rates ; faster report rate will have higher current consumption, but will give faster response to user interacton
+    // Higher than the rates defined below doesn't work, the report rate is not achieved (too fast)
+    // Lower speeds used for lower power modes, active mode has fastest report rate (32ms)
+    // Note that lower value means faster report rate! (value stored here is actually the period)
+    U8 report_rates[12]; 
+    report_rates[0] = 0x05;  // address high byte
+    report_rates[1] = 0x7A;  // address low byte
+    report_rates[2] = 0x00;  // report rate in active mode, high byte
+    report_rates[3] = 0x0D;  // report rate in active mode, low byte
+    report_rates[4] = 0x00;  // report rate in idle touch mode, high byte
+    report_rates[5] = 0x32;  // report rate in idle touch mode, low byte
+    report_rates[6] = 0x00;  // report rate in idle mode, high byte
+    report_rates[7] = 0x4B;  // report rate in idle mode, low byte
+    report_rates[8] = 0x00;  // report rate in LP1 mode, high byte
+    report_rates[9] = 0xC8;  // report rate in LP1 mode, low byte
+    report_rates[10] = 0x01; // report rate in LP2 mode, high byte
+    report_rates[10] = 0x90; // report rate in LP2 mode, low byte
+    
+    // Timeout times ; once these times have elapsed, the system will change to the next state according to the state diagram
+    U8 timeout_times[9]; 
+    timeout_times[0] = 0x05;  // address high byte
+    timeout_times[1] = 0x84;  // address low byte
+    timeout_times[2] = 0x05;  // timeout time in active mode
+    timeout_times[3] = 0x3C;  // timeout time in idle touch mode
+    timeout_times[4] = 0x14;  // timeout time in idle mode
+    timeout_times[5] = 0x1E;  // timeout time in LP1 mode, in multiples of 20s!
+    timeout_times[6] = 0x08;  // reference update time - updates the reference values (count values are compared against reference values to detect user interaction) - only happens in LP-modes
+    timeout_times[7] = 0x0A;  // snap timeout -- not used here so doesn't matter
+    timeout_times[8] = 0x64;  // I2C timeout - if communicaiton window is not serviced within this time, the session is ended and processing continues as normal
+    
+    // filter_settings ; enable MAV filter, IIR filter with dinamically adjusted damping factor (relative to XY movement), ALP count filter
+    U8 filter_settings[11]; 
+    filter_settings[0] = 0x06;  // address high byte
+    filter_settings[1] = 0x32;  // address low byte
+    filter_settings[2] = 0x0B;  // enable all filters and set IIR filtering method to dynamic
+    filter_settings[3] = 0x80;  // XY static beta
+    filter_settings[4] = 0x32;  // ALP count beta
+    filter_settings[5] = 0x08;  // ALP1 LTA beta
+    filter_settings[6] = 0x06;  // ALP2 LTA beta
+    filter_settings[7] = 0x07;  // XY dynamic filter – bottom beta 
+    filter_settings[8] = 0x06;  // XY dynamic filter – lower speed
+    filter_settings[9] = 0x00;  // XY dynamic filter – upper speed, high byte
+    filter_settings[10] = 0x7C; // XY dynamic filter – upper speed, high byte
+    
+    // write systemContro0x00;l0and1 
+    //drvwrite...        0x7C;
+    
+    // Now end communication window by sending some data to 0xEEEE. This will allow the ATI procedure to happen. I2C communication will reume again once the ATI routine has completed.
     
     
+    // Wake i2C and then wait at least 150us (if we don't wait 150us the device doesn't wake)
     
-    
-    
-    //old code:
-    
-//    
-//    // touchpad threshold settings configuration
-//    data[0] = 0xAA; //THRESHOLD_SETTINGS;                       // = 0x11, address for writing threshold settings, p32 datasheet
-//    data[1] = 0xBB; //PROXTHRESHOLD_VAL;			// Prox Threshold
-//    data[2] = 0xEE; //TOUCHMULTIPLIER_VAL;			// Touch Multiplier
-//    data[3] = 0xEE; //TOUCHSHIFTER_VAL;				// Touch Shifter
-//    data[4] = 0xBB;// PMPROXTHRESHOLD_VAL;			// PM Prox Threshold
-//    data[5] = (unsigned char)(SNAPTHRESHOLD_VAL>>8);	// Snap threshold
-//    data[6] = (unsigned char)SNAPTHRESHOLD_VAL;		// Snap threshold
-//    data[7] = PROXTHRESHOLD2_VAL;		        // Non-trackpad channels prox threshold
-//    data[8] = TOUCHMULTIPLIER2_VAL;			// Non-trackpad channels Touch Multiplier
-//    data[9] = TOUCHSHIFTER2_VAL;		        // Non-trackpad channels Touch Shifter
-//    
-//    // Wake i2C and then wait at least 150us (if we don't wait 150us the device doesn't wake)
-    DrvI2cMasterDevice_WriteData_specificSlaveRegister(i2c_device_id, &data[0], 2, TRUE, 0x0433);
-//    while (timer>0)
-//    {
-//      timer--; // timer is 200 at start, takes around 170us to count to zero
-//    }
-    
-    
-    
-//    timer = 100;
-//    DrvI2cMasterDevice_WriteData(i2c_device_id,&data[2], 3, TRUE); //,0xEEEE);
-//    while (timer>0)
-//    {
-//      timer--; // timer is 200 at start, takes around 170us to count to zero
-//    }
-//    timer = 100;
-//    DrvI2cMasterDevice_WriteData(i2c_device_id, &data[2], 1, TRUE);
-//    while (timer>0)
-//    {
-//      timer--; // timer is 200 at start, takes around 170us to count to zero
-//    }
-//    timer = 100;
-//    DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, data, 2, TRUE,0x0433);
-//    while (timer>0)
-//    {
-//      timer--; // timer is 200 at start, takes around 170us to count to zero
-//    }
-//    DrvI2cMasterDevice_WriteData(i2c_device_id, data, 10, TRUE);     
 }    
 //================================================================================================//
 
