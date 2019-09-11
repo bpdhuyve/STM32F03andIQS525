@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <settings>
     <DebugChecksum>
-        <Checksum>2389968768</Checksum>
+        <Checksum>3133958122</Checksum>
     </DebugChecksum>
     <Stack>
         <FillEnabled>0</FillEnabled>
@@ -142,8 +142,8 @@
         <ShowArgs>0</ShowArgs>
     </CallStack>
     <Disassembly>
-        <MixedMode>1</MixedMode>
         <InstrCount>0</InstrCount>
+        <MixedMode>1</MixedMode>
     </Disassembly>
     <Disassemble_mode>
         <mode>0</mode>
@@ -161,12 +161,10 @@
         <Bp2>_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\base\303\rel_11\CoreLog.c}.774.9" 0 0 1 "" 0 "" 0</Bp2>
         <Bp3>_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\base\302\rel_9\i2c\DrvI2cMasterChannelBitBang.c}.349.3" 0 0 1 "" 0 "" 0</Bp3>
         <Bp4>_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\base\302\rel_9\i2c\DrvI2cMasterChannelBitBang.c}.329.3" 0 0 1 "" 0 "" 0</Bp4>
-        <Bp5>_ 0 "EMUL_CODE" "{$PROJ_DIR$\src\AppTouch.c}.242.8" 0 0 1 "" 0 "" 0</Bp5>
-        <Bp6>_ 0 "EMUL_CODE" "{$PROJ_DIR$\src\AppTouch.c}.195.8" 0 0 1 "" 0 "" 0</Bp6>
-        <Bp7>_ 0 "EMUL_CODE" "{$PROJ_DIR$\src\AppTouch.c}.230.6" 0 0 1 "" 0 "" 0</Bp7>
-        <Bp8>_ 1 "EMUL_CODE" "{$PROJ_DIR$\src\AppLogic.c}.256.9" 0 0 1 "" 0 "" 0</Bp8>
-        <Bp9>_ 1 "EMUL_CODE" "{$PROJ_DIR$\src\AppMain.c}.177.5" 0 0 1 "" 0 "" 0</Bp9>
-        <Count>10</Count>
+        <Bp5>_ 0 "EMUL_CODE" "{$PROJ_DIR$\src\AppTouch.c}.229.5" 0 0 1 "" 0 "" 0</Bp5>
+        <Bp6>_ 0 "EMUL_CODE" "{$PROJ_DIR$\src\AppTouch.c}.229.5" 0 0 1 "" 0 "" 0</Bp6>
+        <Bp7>_ 0 "EMUL_CODE" "{$PROJ_DIR$\src\AppTouch.c}.229.5" 0 0 1 "" 0 "" 0</Bp7>
+        <Count>8</Count>
     </Breakpoints2>
     <LogFile>
         <LoggingEnabled>_ 0</LoggingEnabled>

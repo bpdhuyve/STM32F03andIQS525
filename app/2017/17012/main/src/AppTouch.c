@@ -35,7 +35,8 @@
 #include "gpio\SysPin.h"
 
 // DRV
-
+#include "gpio\DrvGpio.h"
+#include "gpio\DrvGpioSys.h"
 // APP
 #include "AppTouch.h"
 #include "IQS5xx.h"
@@ -77,6 +78,10 @@ static I2C_DEVICE_ID	i2c_device_id;
 static U8	        data_buffer[60];
 static U8               evenOrNot = 0;
 static U8               timer = 200;
+static DRVGPIO_PIN_HNDL RDYpin;
+static BOOL             RDY_wait = FALSE;
+// Used to end communication window
+U8 end_communication_window[4] = {0xEE,0xEE,0x00,0x01};  
 //================================================================================================//
 
 
@@ -96,9 +101,11 @@ static U8               timer = 200;
 // refer to datasheet of IQS525 B000 for explanation of every register, pages are mentioned below
 static void AppTouch_settings(void)
 {
+    // ====================================================================================================================//
+    // set all configuration values
+    // ====================================================================================================================//
   
-    // Used to end communication window
-    U8 end_communication_window[4] = {0xEE,0xEE,0x00,0x01};  
+  
      
     // Register 0x0431 = SystemControl0 ; 0x0432 = SystemControl1 ; p. 40 datasheet
     U8 system_control_0and1[4] = {0x04,0x31,0xB8,0x00};  // bit 5 of high byte is 'auto ATI bit' --> important that it is set so that auto ATI is performed at start - the bit is automatically cleared afterwards         
@@ -110,12 +117,12 @@ static void AppTouch_settings(void)
     U8 thresholds[8];
     thresholds[0] = 0x05;  // address high byte
     thresholds[1] = 0x92;  // address low byte
-    thresholds[2] = 0x17;  // Snap threshold high byte  -- not used in this implementation so value doesn't really matter
-    thresholds[3] = 0x08;  // Snap threshold low byte   -- not used in this implementation so value doesn't really matter
-    thresholds[4] = 0x12;  // Prox threshold - trackpad
-    thresholds[5] = 0x0C;  // Prox threshold - ALP channel
-    thresholds[6] = 0x00;  // Global touch multiplier - set
-    thresholds[7] = 0x00;  // Global touch multiplier - clear
+    thresholds[2] = 0x00;  // Snap threshold high byte  -- not used in this implementation so value doesn't really matter
+    thresholds[3] = 0x64;  // Snap threshold low byte   -- not used in this implementation so value doesn't really matter
+    thresholds[4] = 0x17;  // Prox threshold - trackpad
+    thresholds[5] = 0x08;  // Prox threshold - ALP channel
+    thresholds[6] = 0x12;  // Global touch multiplier - set
+    thresholds[7] = 0x0C;  // Global touch multiplier - clear
     
     U8 indiviual_multiplier_adjustments[150];  // Individual touch multiplier adjustments, for finetuning every channel separately - TODO if necessary
     
@@ -180,11 +187,30 @@ static void AppTouch_settings(void)
     filter_settings[9] = 0x00;  // XY dynamic filter – upper speed, high byte
     filter_settings[10] = 0x7C; // XY dynamic filter – upper speed, high byte
     
-    // write systemContro0x00;l0and1 
-    //drvwrite...        0x7C;
     
-    // Now end communication window by sending some data to 0xEEEE. This will allow the ATI procedure to happen. I2C communication will reume again once the ATI routine has completed.
+    // =====================================================================================================================//
+    // write configuration to IQS525
+    // =====================================================================================================================//
     
+       
+    while(!RDY_wait)
+    {
+      RDY_wait = DrvGpio_GetPin(RDYpin);
+    }
+    DrvI2cMasterDevice_WriteData(i2c_device_id, end_communication_window, sizeof(end_communication_window)/sizeof(U8), TRUE);
+    DrvI2cMasterDevice_WriteData(i2c_device_id, system_control_0and1, sizeof(system_control_0and1)/sizeof(U8), TRUE);
+    
+    // End communication window by sending some data to 0xEEEE. This will allow the ATI procedure to happen. I2C communication will reume again once the ATI routine has completed.
+    DrvI2cMasterDevice_WriteData(i2c_device_id, end_communication_window, sizeof(end_communication_window)/sizeof(U8), TRUE);
+    // ATI happening now...
+    
+//    DrvI2cMasterDevice_WriteData(i2c_device_id, system_config_0and1, sizeof(system_config_0and1)/sizeof(U8), TRUE);
+//    DrvI2cMasterDevice_WriteData(i2c_device_id, thresholds, sizeof(thresholds)/sizeof(U8), TRUE);
+//    DrvI2cMasterDevice_WriteData(i2c_device_id, indiviual_multiplier_adjustments, sizeof(indiviual_multiplier_adjustments)/sizeof(U8), TRUE);
+//    DrvI2cMasterDevice_WriteData(i2c_device_id, ATI_settings, sizeof(ATI_settings)/sizeof(U8), TRUE);
+//    DrvI2cMasterDevice_WriteData(i2c_device_id, report_rates, sizeof(report_rates)/sizeof(U8), TRUE);
+//    DrvI2cMasterDevice_WriteData(i2c_device_id, timeout_times, sizeof(timeout_times)/sizeof(U8), TRUE);    
+//    DrvI2cMasterDevice_WriteData(i2c_device_id, filter_settings, sizeof(filter_settings)/sizeof(U8), TRUE);
     
     // Wake i2C and then wait at least 150us (if we don't wait 150us the device doesn't wake)
     
@@ -199,8 +225,10 @@ static void AppTouch_settings(void)
     
 void AppTouch_Init(I2C_CHANNEL_HNDL i2c_channel, U8 address)
 {
+  
     MODULE_INIT_ONCE();
     U8 data[2] = {0,0};
+    RDYpin = DrvGpioSys_RegisterPin(GPIO_PORT_A, 3, PIN_INPUT);
     i2c_device_id = DrvI2cMasterDevice_Register(i2c_channel, address, 100000);
     
     AppTouch_settings();  // configure all parameters related to the touchpad
@@ -219,15 +247,21 @@ void AppTouch_Handler(void)
 
 U8 AppTouch_GetTouch(U16* x, U16* y)
 {
-  
+    while(!RDY_wait)
+    {
+      RDY_wait = DrvGpio_GetPin(RDYpin);
+    }
     //read  x,y data from the touchpad
-    if(DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, data_buffer, 10, TRUE, 0x0011) )//DrvI2cMasterDevice_ReadData(i2c_device_id, &data_buffer[0], 8, TRUE))
+    if(DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, data_buffer, 10, TRUE, 0x0095) )//DrvI2cMasterDevice_ReadData(i2c_device_id, &data_buffer[0], 8, TRUE))
     {
         *x = ((data_buffer[5] << 8) + data_buffer[6]);
         *y = ((data_buffer[7] << 8) + data_buffer[8]); 
-        return (TRUE); //data_buffer[0] & 0x0F);
+        //DrvI2cMasterDevice_WriteData(i2c_device_id, end_communication_window, sizeof(end_communication_window)/sizeof(U8), TRUE);
+
+        return (data_buffer[0] & 0x0F);
     }
     
+   DrvI2cMasterDevice_WriteData(i2c_device_id, end_communication_window, sizeof(end_communication_window)/sizeof(U8), TRUE);
 
     return 0;
 }
