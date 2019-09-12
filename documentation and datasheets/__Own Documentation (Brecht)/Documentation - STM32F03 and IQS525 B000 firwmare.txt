@@ -180,5 +180,5 @@ Read out some registers for sanity check:
 // REad out 0x58E (syst config 0) via pc tool and while debugging --> different!
 //reset...
 // U8 systemcontrol01 = {0x04,0x31,0xB8,0x00}
-//DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, data_buffer, 10, TRUE, 0x0011}
+DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, data_buffer, 1, TRUE, 0x0011}
 	

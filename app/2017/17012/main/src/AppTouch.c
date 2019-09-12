@@ -197,14 +197,16 @@ static void AppTouch_settings(void)
     {
       RDY_wait = DrvGpio_GetPin(RDYpin);
     }
-    DrvI2cMasterDevice_WriteData(i2c_device_id, end_communication_window, sizeof(end_communication_window)/sizeof(U8), TRUE);
+    //DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, data_buffer, 1, TRUE, 0xEEEE);
+    //DrvI2cMasterDevice_WriteData(i2c_device_id, end_communication_window, sizeof(end_communication_window)/sizeof(U8), TRUE);
     DrvI2cMasterDevice_WriteData(i2c_device_id, system_control_0and1, sizeof(system_control_0and1)/sizeof(U8), TRUE);
+    DrvI2cMasterDevice_WriteData(i2c_device_id, system_config_0and1, sizeof(system_config_0and1)/sizeof(U8), TRUE);
+    
     
     // End communication window by sending some data to 0xEEEE. This will allow the ATI procedure to happen. I2C communication will reume again once the ATI routine has completed.
-    DrvI2cMasterDevice_WriteData(i2c_device_id, end_communication_window, sizeof(end_communication_window)/sizeof(U8), TRUE);
+    //DrvI2cMasterDevice_WriteData(i2c_device_id, end_communication_window, sizeof(end_communication_window)/sizeof(U8), TRUE);
     // ATI happening now...
     
-//    DrvI2cMasterDevice_WriteData(i2c_device_id, system_config_0and1, sizeof(system_config_0and1)/sizeof(U8), TRUE);
 //    DrvI2cMasterDevice_WriteData(i2c_device_id, thresholds, sizeof(thresholds)/sizeof(U8), TRUE);
 //    DrvI2cMasterDevice_WriteData(i2c_device_id, indiviual_multiplier_adjustments, sizeof(indiviual_multiplier_adjustments)/sizeof(U8), TRUE);
 //    DrvI2cMasterDevice_WriteData(i2c_device_id, ATI_settings, sizeof(ATI_settings)/sizeof(U8), TRUE);
@@ -252,56 +254,59 @@ U8 AppTouch_GetTouch(U16* x, U16* y)
       RDY_wait = DrvGpio_GetPin(RDYpin);
     }
     //read  x,y data from the touchpad
-    if(DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, data_buffer, 10, TRUE, 0x0095) )//DrvI2cMasterDevice_ReadData(i2c_device_id, &data_buffer[0], 8, TRUE))
+    //DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, data_buffer, 1, TRUE, 0x0431);
+
+    if(DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, data_buffer, 10, TRUE, 0x0011) )//DrvI2cMasterDevice_ReadData(i2c_device_id, &data_buffer[0], 8, TRUE))
     {
         *x = ((data_buffer[5] << 8) + data_buffer[6]);
         *y = ((data_buffer[7] << 8) + data_buffer[8]); 
         //DrvI2cMasterDevice_WriteData(i2c_device_id, end_communication_window, sizeof(end_communication_window)/sizeof(U8), TRUE);
-
+        //DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, data_buffer, 1, TRUE, 0x00EE);
         return (data_buffer[0] & 0x0F);
     }
     
-   DrvI2cMasterDevice_WriteData(i2c_device_id, end_communication_window, sizeof(end_communication_window)/sizeof(U8), TRUE);
-
+   //DrvI2cMasterDevice_WriteData(i2c_device_id, end_communication_window, sizeof(end_communication_window)/sizeof(U8), TRUE);
+   //DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, data_buffer, 1, TRUE, 0xEEEE);
     return 0;
 }
 
 //================================================================================================//
-// @ brief : setup default read register (for reading x,y data)
-//  rest of loop is used to write and read to registers - only for testing purposes
+// @ brief : used to write and read to registers - only for testing purposes
 U8 AppTouch_GetData(U16* x, U16* y)
 {
   
   U8 testdata[5] = {0xAA, 0xBB, 0xCC};
   U8 defaultReg[4] = {0x00, 0x11, 0x099, 0x55};
-    if (evenOrNot % 2 == 0)
+  while(!RDY_wait)
+  {
+    RDY_wait = DrvGpio_GetPin(RDYpin);
+  }
+  if (evenOrNot % 2 == 0)
+    
+  {
+    if (evenOrNot == 0)
+    {
+      DrvI2cMasterDevice_WriteData_specificSlaveRegister(i2c_device_id, testdata, 2, TRUE,0x0673); // write 2 bytes to 0x0673
       
-    {
-      if (evenOrNot == 0)
-      {
-        //DrvI2cMasterDevice_WriteData_specificSlaveRegister(i2c_device_id, defaultReg, 4, TRUE,0x056D); // write 2 bytes to 0x0673
-        DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, data_buffer, 4, TRUE,0x056D);  // read 3 bytes from 0x0673
-      }
-      else
-      {
-        DrvI2cMasterDevice_WriteData_specificSlaveRegister(i2c_device_id, data_buffer, 2, TRUE,0xEEEE);  // read 3 bytes from 0x0673
-      }
-    }
-    else if (evenOrNot > 1 && evenOrNot < 4)
-    {
-      //DrvI2cMasterDevice_ReadData_repStart(i2c_device_id, data_buffer, 8, TRUE, 0x01);   
-      //DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, data_buffer, 6, TRUE, 0x0000);
     }
     else
     {
+      DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, testdata, 2, TRUE,0x0673);  // read 2 bytes from 0x0673
     }
-    
-    //evenOrNot = evenOrNot % 254;
-    if (evenOrNot == 5){
-      evenOrNot--;
-    }
-    evenOrNot++;
-    
-    return 0;
+  }
+  else if (evenOrNot > 1 && evenOrNot < 4)
+  {
+    //DrvI2cMasterDevice_ReadData_repStart(i2c_device_id, data_buffer, 8, TRUE, 0x01);   
+    //DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, data_buffer, 6, TRUE, 0x0000);
+  }
+  else
+  {
+  }
+  
+  evenOrNot = evenOrNot % 254;
+  
+  evenOrNot++;
+  
+  return 0;
 }
 //================================================================================================//
