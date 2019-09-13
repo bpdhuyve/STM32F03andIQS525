@@ -35,7 +35,8 @@
 // I N C L U D E S
 //------------------------------------------------------------------------------------------------//
 #include "Core.h"
-
+#include "gpio\DrvGpio.h"
+#include "gpio\DrvGpioSys.h"
 //SYS include section
 #include "i2c\SysI2cMasterInt.h"
 //================================================================================================//
@@ -218,6 +219,11 @@ static void SysI2cMasterIntI2cIsr(I2C_CHANNEL channel)
                 {
                   read_struct.read_bit = FALSE;
                   SysI2cMasterIntEndTransfer(channel, FALSE, TRUE); // 'False' is to omit the 'i2c-stop' 
+                  U32 timer1 = 000000;
+                  while (timer1>0)
+                  {
+                    timer1--;
+                  }
                   SysI2cMasterInt_Channel_ReadData(read_struct.channel, read_struct.address, read_struct.data_ptr, read_struct.count);
                 }
                 else

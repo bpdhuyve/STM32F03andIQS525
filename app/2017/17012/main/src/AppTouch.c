@@ -79,6 +79,7 @@ static U8	        data_buffer[60];
 static U8               evenOrNot = 0;
 static U8               timer = 200;
 static DRVGPIO_PIN_HNDL RDYpin;
+static DRVGPIO_PIN_HNDL NRSTpin;
 static BOOL             RDY_wait = FALSE;
 // Used to end communication window
 U8 end_communication_window[4] = {0xEE,0xEE,0x00,0x01};  
@@ -232,7 +233,8 @@ void AppTouch_Init(I2C_CHANNEL_HNDL i2c_channel, U8 address)
     U8 data[2] = {0,0};
     RDYpin = DrvGpioSys_RegisterPin(GPIO_PORT_A, 3, PIN_INPUT);
     i2c_device_id = DrvI2cMasterDevice_Register(i2c_channel, address, 100000);
-    
+    //NRSTpin = DrvGpioSys_RegisterPin(GPIO_PORT_A, 2, PIN_OUTPUT);
+    //DrvGpio_SetPin(NRSTpin,0);   //appears to break something
     AppTouch_settings();  // configure all parameters related to the touchpad
     
     MODULE_INIT_DONE();
@@ -262,7 +264,7 @@ U8 AppTouch_GetTouch(U16* x, U16* y)
         *y = ((data_buffer[7] << 8) + data_buffer[8]); 
         //DrvI2cMasterDevice_WriteData(i2c_device_id, end_communication_window, sizeof(end_communication_window)/sizeof(U8), TRUE);
         //DrvI2cMasterDevice_ReadData_specificSlaveRegister(i2c_device_id, data_buffer, 1, TRUE, 0x00EE);
-        return (data_buffer[0] & 0x0F);
+        return (data_buffer[0]);
     }
     
    //DrvI2cMasterDevice_WriteData(i2c_device_id, end_communication_window, sizeof(end_communication_window)/sizeof(U8), TRUE);
