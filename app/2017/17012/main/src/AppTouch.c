@@ -132,9 +132,9 @@ static void AppTouch_settings(void)
     U8 ATI_settings[13];
     ATI_settings[0] = 0x05;  // address high byte 
     ATI_settings[1] = 0x6D;  // address low byte
-    ATI_settings[2] = 0x01;  // ATI target value (for normal mode) high byte
+    ATI_settings[2] = 0x02;  // ATI target value (for normal mode) high byte
     ATI_settings[3] = 0xF4;  // ATI target value (for normal mode) low byte
-    ATI_settings[4] = 0x01;  // ATI target value (for ALP channel) high byte
+    ATI_settings[4] = 0x02;  // ATI target value (for ALP channel) high byte
     ATI_settings[5] = 0xF4;  // ATI target value (for ALP channel) high byte
     ATI_settings[6] = 0x4B;  // Reference drift limit - p.17 datasheet - condition for Re-ATI to activate
     ATI_settings[7] = 0x32;  // ALP LTA drift limit - p.17  datasheet - condition for Re-ATI to activate
@@ -188,6 +188,12 @@ static void AppTouch_settings(void)
     filter_settings[9] = 0x00;  // XY dynamic filter – upper speed, high byte
     filter_settings[10] = 0x7C; // XY dynamic filter – upper speed, high byte
     
+    //auto tuning global multiplier
+    U8 ATI_C[4];
+    ATI_C[0] = 0x05;  // address high byte
+    ATI_C[0] = 0x6B;  // address low byte
+    ATI_C[0] = 0x03;  
+    ATI_C[0] = 0x15; 
     
     // =====================================================================================================================//
     // write configuration to IQS525
@@ -209,12 +215,12 @@ static void AppTouch_settings(void)
     // ATI happening now...
     
 //    DrvI2cMasterDevice_WriteData(i2c_device_id, thresholds, sizeof(thresholds)/sizeof(U8), TRUE);
-//    DrvI2cMasterDevice_WriteData(i2c_device_id, indiviual_multiplier_adjustments, sizeof(indiviual_multiplier_adjustments)/sizeof(U8), TRUE);
-//    DrvI2cMasterDevice_WriteData(i2c_device_id, ATI_settings, sizeof(ATI_settings)/sizeof(U8), TRUE);
+    DrvI2cMasterDevice_WriteData(i2c_device_id, indiviual_multiplier_adjustments, sizeof(indiviual_multiplier_adjustments)/sizeof(U8), TRUE);
+    DrvI2cMasterDevice_WriteData(i2c_device_id, ATI_settings, sizeof(ATI_settings)/sizeof(U8), TRUE);
     DrvI2cMasterDevice_WriteData(i2c_device_id, report_rates, sizeof(report_rates)/sizeof(U8), TRUE);
-//    DrvI2cMasterDevice_WriteData(i2c_device_id, timeout_times, sizeof(timeout_times)/sizeof(U8), TRUE);    
-//    DrvI2cMasterDevice_WriteData(i2c_device_id, filter_settings, sizeof(filter_settings)/sizeof(U8), TRUE);
-    
+    DrvI2cMasterDevice_WriteData(i2c_device_id, timeout_times, sizeof(timeout_times)/sizeof(U8), TRUE);    
+    DrvI2cMasterDevice_WriteData(i2c_device_id, filter_settings, sizeof(filter_settings)/sizeof(U8), TRUE);
+    DrvI2cMasterDevice_WriteData(i2c_device_id, ATI_C, sizeof(ATI_C)/sizeof(U8), TRUE);
     // Wake i2C and then wait at least 150us (if we don't wait 150us the device doesn't wake)
     
 }    
