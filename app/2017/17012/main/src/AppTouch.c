@@ -205,7 +205,7 @@ static void AppTouch_settings(void)
     
     
     // End communication window by sending some data to 0xEEEE. This will allow the ATI procedure to happen. I2C communication will reume again once the ATI routine has completed.
-    //DrvI2cMasterDevice_WriteData(i2c_device_id, end_communication_window, sizeof(end_communication_window)/sizeof(U8), TRUE);
+    DrvI2cMasterDevice_WriteData(i2c_device_id, end_communication_window, sizeof(end_communication_window)/sizeof(U8), TRUE);
     // ATI happening now...
     
 //    DrvI2cMasterDevice_WriteData(i2c_device_id, thresholds, sizeof(thresholds)/sizeof(U8), TRUE);
@@ -232,7 +232,7 @@ void AppTouch_Init(I2C_CHANNEL_HNDL i2c_channel, U8 address)
     MODULE_INIT_ONCE();
     U8 data[2] = {0,0};
     RDYpin = DrvGpioSys_RegisterPin(GPIO_PORT_A, 3, PIN_INPUT);
-    i2c_device_id = DrvI2cMasterDevice_Register(i2c_channel, address, 100000);
+    i2c_device_id = DrvI2cMasterDevice_Register(i2c_channel, address, 10000);
     //NRSTpin = DrvGpioSys_RegisterPin(GPIO_PORT_A, 2, PIN_OUTPUT);
     //DrvGpio_SetPin(NRSTpin,0);   //appears to break something
     AppTouch_settings();  // configure all parameters related to the touchpad

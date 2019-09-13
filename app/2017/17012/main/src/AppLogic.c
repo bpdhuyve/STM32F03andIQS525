@@ -246,7 +246,11 @@ static void Task_GetTouchStatus(VPTR data_ptr)
 {
     U16 x, y;
     U8 touches =  AppTouch_GetTouch(&x, &y);
-
+    U32 timer1 = 100000;
+    while (timer1>0)
+    {
+      timer1--;
+    }
     if(touches > 0)
     {
         y_cor = 1024 - x;
