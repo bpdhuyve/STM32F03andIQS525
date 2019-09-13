@@ -211,7 +211,7 @@ static void AppTouch_settings(void)
 //    DrvI2cMasterDevice_WriteData(i2c_device_id, thresholds, sizeof(thresholds)/sizeof(U8), TRUE);
 //    DrvI2cMasterDevice_WriteData(i2c_device_id, indiviual_multiplier_adjustments, sizeof(indiviual_multiplier_adjustments)/sizeof(U8), TRUE);
 //    DrvI2cMasterDevice_WriteData(i2c_device_id, ATI_settings, sizeof(ATI_settings)/sizeof(U8), TRUE);
-//    DrvI2cMasterDevice_WriteData(i2c_device_id, report_rates, sizeof(report_rates)/sizeof(U8), TRUE);
+    DrvI2cMasterDevice_WriteData(i2c_device_id, report_rates, sizeof(report_rates)/sizeof(U8), TRUE);
 //    DrvI2cMasterDevice_WriteData(i2c_device_id, timeout_times, sizeof(timeout_times)/sizeof(U8), TRUE);    
 //    DrvI2cMasterDevice_WriteData(i2c_device_id, filter_settings, sizeof(filter_settings)/sizeof(U8), TRUE);
     
